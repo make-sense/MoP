@@ -388,6 +388,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1719510876}
   m_RootOrder: 0
+--- !u!1 &473920150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 473920151}
+  - 114: {fileID: 473920152}
+  m_Layer: 0
+  m_Name: AndroidManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &473920151
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 473920150}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2041950503}
+  m_RootOrder: 0
+--- !u!114 &473920152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 473920150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0796b9c1b57e42319c50df1923a74ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1306725450
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,7 +929,7 @@ Transform:
   m_GameObject: {fileID: 1419061292}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00208550575, y: .00208550575, z: .00208550575}
+  m_LocalScale: {x: .00272851298, y: .00272851298, z: .00272851298}
   m_Children:
   - {fileID: 1535815758}
   - {fileID: 1719510876}
@@ -1034,7 +1073,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2041950503}
-  - 114: {fileID: 2041950502}
   - 114: {fileID: 2041950504}
   m_Layer: 0
   m_Name: '@Managers'
@@ -1043,17 +1081,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2041950502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2041950501}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0796b9c1b57e42319c50df1923a74ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2041950503
 Transform:
   m_ObjectHideFlags: 0
@@ -1063,7 +1090,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 473920151}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!114 &2041950504

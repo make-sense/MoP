@@ -10,7 +10,7 @@ public class CommunicationManager : MonoBehaviour {
 #if UNITY_STANDALONE
 		_comm = new SerialCommunication ();
 #else
-		_comm = new CommunicationBase ();
+		_comm = new AndroidCommunication ();
 #endif
 		string [] devices = _comm.GetDeviceList ();
 		Debug.Log ("[CommunicationManager::Start] device count is " + devices.Length);

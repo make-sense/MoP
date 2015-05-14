@@ -6,6 +6,7 @@ public class PhotonInit : MonoBehaviour {
 	public string version = "v1.0";
 
 	void Awake () {
+		Debug.Log ("[PhotonInit:Awake]");
 		PhotonNetwork.ConnectUsingSettings (version);
 	}
 

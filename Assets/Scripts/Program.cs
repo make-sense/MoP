@@ -6,6 +6,7 @@ public class Program : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Debug.Log ("[Program:Start]");
 //		Invoke ("GetBTDevices", 5f);
 	}
 	

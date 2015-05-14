@@ -6,30 +6,33 @@ using System.Collections.Generic;
 public class AndroidManager : MonoBehaviour {
 
 	AndroidJavaObject _activity;
+	AndroidJavaClass _class;
 
 	void Awake () {
+		Debug.Log ("[AndroidManager:Awake]");
 		AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
 		_activity = jc.GetStatic<AndroidJavaObject>("currentActivity");
 		if (_activity == null)
 			Debug.Log ("AndroidActivity is null");
+		_activity.Call ("Echo", "Hello");
 	}
 
 	// Use this for initialization
 	void Start () {
-//		_activity.Call ("HelloFunction");
+		Debug.Log ("[AndroidManager:Start]");
 	}
 	
 	// Update is called once per frame
 	int count;
 	void Update () {
-		count++;
-		_activity.Call("Echo", count.ToString ());
+//		count++;
+//		_activity.Call("Echo", count.ToString ());
 	}
 
 	void Echo (string message) {
-		Debug.Log ("get echo message: " + message);
+		Debug.Log ("[Unity]Get echo message: " + message);
 	}
-
+#if false
 	private List<string> _bluetoothDeviceNameList = new List<string>();
 	private List<byte> _recvBuffer = new List<byte>();
 
@@ -197,6 +200,7 @@ public class AndroidManager : MonoBehaviour {
 		_isBluetoothConnected = false;
 	}
 	#endregion
+	#endif
 
 	private static AndroidManager _instance = null;
 	public static AndroidManager Instance
