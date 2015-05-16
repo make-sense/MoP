@@ -32,7 +32,18 @@ public class AndroidManager : MonoBehaviour {
 	void Echo (string message) {
 		Debug.Log ("[Unity]Get echo message: " + message);
 	}
-#if false
+
+	public void SearchBTDevice () {
+		Debug.Log ("[AndroidManager:SearchBTDevices]");
+		List<string> devices = GetDevice ();
+		if (devices == null)
+			Debug.Log ("Start searching...");
+		else {
+			foreach (string device in devices)
+				Debug.Log ("Found device : " + device);
+		}
+	}
+#if true
 	private List<string> _bluetoothDeviceNameList = new List<string>();
 	private List<byte> _recvBuffer = new List<byte>();
 
@@ -142,27 +153,6 @@ public class AndroidManager : MonoBehaviour {
 		for (int i = 0 ; i < readData.Length/2 ; i++)
 			_recvBuffer.Add(recvBuffer[i]);
 		Debug.Log("[AndroidManager::BluetoothData] " + readData);
-	}
-	#endregion
-
-	#region Log Methods
-	void BTMessage(string logMessage)
-	{
-		Debug.Log("BT Log : " + logMessage);
-		if (logMessage == "STATE_CONNECTED")
-			_isBluetoothConnected = true;
-		else if (logMessage == "STATE_NOTCONNECTED")
-			_isBluetoothConnected = false;
-	}
-	
-	void TWMessage(string logMessage)
-	{
-		Debug.Log("TW Log : " + logMessage);
-	}
-	
-	void SPMessage(string logMessage)
-	{
-		Debug.Log("SP Log : " + logMessage);
 	}
 	#endregion
 

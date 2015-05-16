@@ -12,11 +12,14 @@ public class CommunicationManager : MonoBehaviour {
 #else
 		_comm = new AndroidCommunication ();
 #endif
+
+#if !UNITY_EDITOR
 		string [] devices = _comm.GetDeviceList ();
 		Debug.Log ("[CommunicationManager::Start] device count is " + devices.Length);
 		foreach (string device in devices) {
 			Debug.Log (device);
 		}
+#endif
 	}
 	
 	// Update is called once per frame
