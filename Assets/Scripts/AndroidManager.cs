@@ -110,7 +110,12 @@ public class AndroidManager : MonoBehaviour {
 	
 	public void Send(byte[] buff)
 	{
-		_SendBTMessage(ByteArrayToHexString(buff));
+		Debug.Log ("[AndroidManager::Send] " + ByteArrayToHexString(buff));
+		try {
+			_SendBTMessage(ByteArrayToHexString(buff));
+		}catch (Exception e) {
+			Debug.Log (e.ToString ());
+		}
 	}
 	
 	public int Recv(byte[] buff, int len)
