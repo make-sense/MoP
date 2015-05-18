@@ -7,6 +7,18 @@ public class SerialCommunication : CommunicationBase {
 
 	public SerialPort serialPort;
 
+	public override bool Connect (string device) {
+		return false;
+	}
+	
+	public override bool Disconnect () {
+		return false;
+	}
+	
+	public override bool IsConnected () {
+		return false;
+	}
+
 	public override string[] GetDeviceList () {
 		return SerialPort.GetPortNames ();
 	}

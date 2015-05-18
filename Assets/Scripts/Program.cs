@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class Program : MonoBehaviour {
 
+	RobotManager robot = new RobotManager ();
+
 	// Use this for initialization
 	void Start () {
 		Debug.Log ("[Program:Start]");
@@ -16,17 +18,11 @@ public class Program : MonoBehaviour {
 	}
 
 	public void Forward () {
-		byte[] buff1 = new byte[] {0xaa, 0x05, 0x31, 0x33, 0x32, 0x00, 0x6a};
-		AndroidManager.Instance.Send(buff1);
-		byte[] buff2 = new byte[] {0xaa, 0x05, 0x31, 0x34, 0x32, 0x00, 0x69};
-		AndroidManager.Instance.Send(buff2);
+		robot.Move (1f, 0);
 	}
 	
 	public void Backward () {
-		byte[] buff1 = new byte[] {0xaa, 0x05, 0x31, 0x33, 0x00, 0x00, 0x9c};
-		AndroidManager.Instance.Send(buff1);
-		byte[] buff2 = new byte[] {0xaa, 0x05, 0x31, 0x34, 0x00, 0x00, 0x9b};
-		AndroidManager.Instance.Send(buff2);
+		robot.Move (0, 0);
 	}
 	
 	public void RightTurn () {
