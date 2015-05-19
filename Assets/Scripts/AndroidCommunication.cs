@@ -4,36 +4,29 @@ using System.Collections;
 public class AndroidCommunication : CommunicationBase {
 
 	public override bool Connect (string device) {
-		return false;
+		AndroidManager.Instance.ConnectDevice (device);
+		return true;
 	}
 
 	public override bool Disconnect () {
-		return false;
+		AndroidManager.Instance.DisconnectDevice ();
+		return true;
 	}
 
 	public override bool IsConnected () {
-		return false;
+		return AndroidManager.Instance.IsConnected ();
 	}
 
 	public override string[] GetDeviceList () {
-		return null;
+		return AndroidManager.Instance.GetDevice ().ToArray ();
 	}
 	
 	public override int Read (byte[] bytes, int len) {
-		return 0;
+		return AndroidManager.Instance.Recv (bytes, len);
 	}
 	
 	public override int Write (byte[] bytes, int len) {
-		return 0;
-	}
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		AndroidManager.Instance.Send (bytes);
+		return len;
 	}
 }

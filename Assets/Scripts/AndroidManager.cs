@@ -8,6 +8,8 @@ public class AndroidManager : MonoBehaviour {
 	AndroidJavaObject _activity;
 	AndroidJavaClass _class;
 
+	const bool DEBUG = true;
+
 	void Awake () {
 		Debug.Log ("[AndroidManager:Awake]");
 		AndroidJavaClass jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
@@ -48,8 +50,8 @@ public class AndroidManager : MonoBehaviour {
 	private List<byte> _recvBuffer = new List<byte>();
 
 	private bool _isBluetoothConnected;
-	private int _receivedData = -1;
-	private bool _isReceivedMessage;
+//	private int _receivedData = -1;
+//	private bool _isReceivedMessage;
 	//------------------------------------------
 	
 	#region RobotCommunicator Interface Methods
@@ -129,9 +131,11 @@ public class AndroidManager : MonoBehaviour {
 		return copyLength;
 	}
 	
-	public int GetLength()
+	public int Length
 	{
-		return _recvBuffer.Count;
+		get {
+			return _recvBuffer.Count;
+		}
 	}
 	#endregion
 
@@ -157,7 +161,8 @@ public class AndroidManager : MonoBehaviour {
 		byte[] recvBuffer = HexStringToByteArray(readData);
 		for (int i = 0 ; i < readData.Length/2 ; i++)
 			_recvBuffer.Add(recvBuffer[i]);
-		Debug.Log("[AndroidManager::BluetoothData] " + readData);
+		if (DEBUG)
+			Debug.Log("[AndroidManager::BluetoothData] " + readData);
 	}
 	#endregion
 
@@ -168,12 +173,12 @@ public class AndroidManager : MonoBehaviour {
 		_activity.Call("SendMessage", message);
 	}
 	
-	private int _ReceiveBTMessage()
-	{
-		_isReceivedMessage = false;
-		return _receivedData;
-	}
-	
+//	private int _ReceiveBTMessage()
+//	{
+//		_isReceivedMessage = false;
+//		return _receivedData;
+//	}
+//	
 	private void _SearchDevice()
 	{
 		_bluetoothDeviceNameList.Clear();

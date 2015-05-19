@@ -7,10 +7,10 @@ public class CommunicationManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-#if UNITY_STANDALONE
-		_comm = new SerialCommunication ();
-#else
+#if UNITY_Android
 		_comm = new AndroidCommunication ();
+#else
+		_comm = new SerialCommunication ();
 #endif
 
 #if !UNITY_EDITOR
@@ -21,9 +21,30 @@ public class CommunicationManager : MonoBehaviour {
 		}
 #endif
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public void Send(byte[] buff) {
+		_comm.Write (buff, buff.Length);
+	}
+
+	public byte[] Recv () {
+		byte[] buff = new byte[2048];
+		_comm.Read (buff, 2048);
+		return buff;
+	}
+
+	private static CommunicationManager _instance = null;
+	public static CommunicationManager Instance
+	{
+		get
+		{
+			if (_instance == null)
+			{
+				_instance = FindObjectOfType(typeof(CommunicationManager)) as CommunicationManager;
+				if (_instance == null)
+					Debug.LogError("There needs to be one active BehaviorManager script on a GameObject in your scene.");
+				
+			}
+			return _instance;
+		}
 	}
 }

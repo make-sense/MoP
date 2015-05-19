@@ -26,11 +26,10 @@ public class Program : MonoBehaviour {
 	}
 	
 	public void RightTurn () {
-		
 	}
 	
 	public void LeftTurn () {
-		
+		robot.Test ();
 	}
 	
 	//	void GetBTDevices () {
