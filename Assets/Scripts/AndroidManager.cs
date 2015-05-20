@@ -8,7 +8,7 @@ public class AndroidManager : MonoBehaviour {
 	AndroidJavaObject _activity;
 	AndroidJavaClass _class;
 
-	const bool DEBUG = true;
+	const bool DEBUG = false;
 
 	void Awake () {
 		Debug.Log ("[AndroidManager:Awake]");
@@ -120,14 +120,16 @@ public class AndroidManager : MonoBehaviour {
 		}
 	}
 	
-	public int Recv(byte[] buff, int len)
+	public int Recv(out byte[] buff, int len)
 	{
 		int count = _recvBuffer.Count;
 		int copyLength = (len < count) ? len : count;
+		buff = new byte[copyLength];
 		if (count > 1) {
 			Buffer.BlockCopy(_recvBuffer.ToArray(), 0, buff, 0, copyLength);
 			_recvBuffer.RemoveRange(0, copyLength);
 		}
+//		Debug.Log ("[AndroidManager::Recv] Copy " + copyLength + " remain " + _recvBuffer.Count.ToString ());
 		return copyLength;
 	}
 	

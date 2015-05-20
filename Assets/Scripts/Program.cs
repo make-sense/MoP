@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 public class Program : MonoBehaviour {
 
-	RobotManager robot = new RobotManager ();
+	public UILabel[] labelSensors;
 
 	// Use this for initialization
 	void Start () {
@@ -14,22 +15,28 @@ public class Program : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		for (int i = 0 ; i < labelSensors.Length ; i++) {
+			try {
+				labelSensors[i].text = RobotManager.Instance.GetSensorValue(i).ToString ();
+			} catch (Exception e) {
+				labelSensors[i].text = "Error";
+			}
+		}
 	}
 
 	public void Forward () {
-		robot.Move (1f, 0);
+		RobotManager.Instance.Move (1f, 0);
 	}
 	
 	public void Backward () {
-		robot.Move (0, 0);
+		RobotManager.Instance.Move (0, 0);
 	}
 	
 	public void RightTurn () {
 	}
 	
 	public void LeftTurn () {
-		robot.Test ();
+		RobotManager.Instance.Test ();
 	}
 	
 	//	void GetBTDevices () {

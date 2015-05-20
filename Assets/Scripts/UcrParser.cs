@@ -89,11 +89,11 @@ public class UcrParser {
 	}
 
 	PROTOCOL_STATE _state;
-	byte[] _buff = new byte[7];
+	byte[] _buff = new byte[256];
 	byte _buff_cnt;
 	byte _buff_len;
 
-	List<sProtocol> _protocol = new List<sProtocol> (64);
+	List<sProtocol> _protocol = new List<sProtocol> ();
 
 	public void _update (byte inChar) {
 		switch (_state) 

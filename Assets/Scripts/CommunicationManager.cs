@@ -7,7 +7,7 @@ public class CommunicationManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-#if UNITY_Android
+#if UNITY_ANDROID
 		_comm = new AndroidCommunication ();
 #else
 		_comm = new SerialCommunication ();
@@ -22,13 +22,18 @@ public class CommunicationManager : MonoBehaviour {
 #endif
 	}
 
-	public void Send(byte[] buff) {
+	public string[] GetDeviceList () {
+		return _comm.GetDeviceList ();
+	}
+
+	public void Write(byte[] buff) {
 		_comm.Write (buff, buff.Length);
 	}
 
-	public byte[] Recv () {
-		byte[] buff = new byte[2048];
-		_comm.Read (buff, 2048);
+	public byte[] Read () {
+		byte[] buff;
+		int nRead = _comm.Read (out buff, 2048);
+//		Debug.Log ("[CommunicationManager:Read] nRead " + nRead.ToString ());
 		return buff;
 	}
 

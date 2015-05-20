@@ -23,7 +23,8 @@ public class SerialCommunication : CommunicationBase {
 		return SerialPort.GetPortNames ();
 	}
 
-	public override int Read (byte[] bytes, int len) {
+	public override int Read (out byte[] bytes, int len) {
+		bytes = new byte[len];
 		return 0;
 	}
 

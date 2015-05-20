@@ -4,6 +4,7 @@ using System.Collections;
 public class AndroidCommunication : CommunicationBase {
 
 	public override bool Connect (string device) {
+//		Debug.Log ("[AndroidCommunication::Connect]");
 		AndroidManager.Instance.ConnectDevice (device);
 		return true;
 	}
@@ -18,11 +19,13 @@ public class AndroidCommunication : CommunicationBase {
 	}
 
 	public override string[] GetDeviceList () {
+//		Debug.Log ("[AndroidCommunication::GetDeviceList]");
 		return AndroidManager.Instance.GetDevice ().ToArray ();
 	}
 	
-	public override int Read (byte[] bytes, int len) {
-		return AndroidManager.Instance.Recv (bytes, len);
+	public override int Read (out byte[] bytes, int len) {
+//		Debug.Log ("[AndroidCommunication::Read]");
+		return AndroidManager.Instance.Recv (out bytes, len);
 	}
 	
 	public override int Write (byte[] bytes, int len) {
