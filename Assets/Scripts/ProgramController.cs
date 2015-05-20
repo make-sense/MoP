@@ -20,10 +20,18 @@ public class ProgramController : MonoBehaviour {
 	}
 
 	public void ArrowUp () {
-		pv.RPC ("Move", PhotonTargets.All, 1f, 0f);
+		pv.RPC ("Move", PhotonTargets.All, 0.7f, 0f);
 	}
-
+	
 	public void ArrowDown () {
 		pv.RPC ("Move", PhotonTargets.All, 0f, 0f);
+	}
+	
+	public void ArrowLeft () {
+		pv.RPC ("Move", PhotonTargets.All, 0f, -0.9f);
+	}
+	
+	public void ArrowRight () {
+		pv.RPC ("Move", PhotonTargets.All, 0f, 0.9f);
 	}
 }

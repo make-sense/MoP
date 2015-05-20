@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class AndroidManager : MonoBehaviour {
-
+#if UNITY_ANDROID
 	AndroidJavaObject _activity;
 	AndroidJavaClass _class;
 
@@ -203,7 +203,20 @@ public class AndroidManager : MonoBehaviour {
 	}
 	#endregion
 	#endif
+#else
+	public void ConnectDevice(string name) { }
+	public void DisconnectDevice() { }
+	public bool IsConnected() {return false;}
+	public List<string> GetDevice() {return null;}
 
+	public void Send(byte[] buff) { }
+	
+	public int Recv(out byte[] buff, int len)
+	{
+		buff = new byte[1];
+		return 0;
+	}
+#endif
 	private static AndroidManager _instance = null;
 	public static AndroidManager Instance
 	{

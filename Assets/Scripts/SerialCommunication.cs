@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-using System.IO.Ports;
 
 public class SerialCommunication : CommunicationBase {
-
-	public SerialPort serialPort;
-
+#if UNITY_STANDALONE
+	public System.IO.Ports.SerialPort serialPort;
+#endif
 	public override bool Connect (string device) {
 		return false;
 	}
@@ -20,7 +19,11 @@ public class SerialCommunication : CommunicationBase {
 	}
 
 	public override string[] GetDeviceList () {
-		return SerialPort.GetPortNames ();
+		#if UNITY_STANDALONE
+		return System.IO.Ports.SerialPort.GetPortNames ();
+		#else
+		return null;
+		#endif
 	}
 
 	public override int Read (out byte[] bytes, int len) {

@@ -9,8 +9,10 @@ public class CommunicationManager : MonoBehaviour {
 	void Start () {
 #if UNITY_ANDROID
 		_comm = new AndroidCommunication ();
-#else
+#elif UNITY_STANDALONE
 		_comm = new SerialCommunication ();
+#else
+		throw new System.NotImplementedException("Not implemented except android and windows");
 #endif
 
 #if !UNITY_EDITOR
