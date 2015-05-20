@@ -87,8 +87,8 @@ public class RobotManager : MonoBehaviour {
 	[RPC]
 	public void Move (float linear, float angular) {
 		Debug.Log ("[RobotManager:Move] : (" + linear.ToString () + ", " + angular.ToString () + ")"); 
-		float velocityLeft = angular - linear;
-		float velocityRight = angular + linear;
+		float velocityLeft = angular + linear;
+		float velocityRight = angular - linear;
 		CommunicationManager.Instance.Write (UcrParser.GetBuffDcSpeed (51, (int)(velocityLeft*100)));
 		CommunicationManager.Instance.Write (UcrParser.GetBuffDcSpeed (52, (int)(velocityRight*100)));
 	}

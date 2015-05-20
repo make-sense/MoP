@@ -25,7 +25,7 @@ public class Program : MonoBehaviour {
 	}
 
 	public void Forward () {
-		RobotManager.Instance.Move (1f, 0);
+		RobotManager.Instance.Move (0.7f, 0);
 	}
 	
 	public void Backward () {
@@ -33,10 +33,11 @@ public class Program : MonoBehaviour {
 	}
 	
 	public void RightTurn () {
+		RobotManager.Instance.Move (0, 0.9f);
 	}
 	
 	public void LeftTurn () {
-		RobotManager.Instance.Test ();
+		RobotManager.Instance.Move (0, -0.9f);
 	}
 	
 	//	void GetBTDevices () {
