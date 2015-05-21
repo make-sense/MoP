@@ -34,4 +34,12 @@ public class ProgramController : MonoBehaviour {
 	public void ArrowRight () {
 		pv.RPC ("Move", PhotonTargets.All, 0f, 0.9f);
 	}
+
+	public void SetAngle () {
+		UILabel labelID = UISlider.current.transform.FindChild ("LabelID").GetComponentInChildren<UILabel> ();
+		UILabel labelValue = UISlider.current.transform.FindChild ("LabelValue").GetComponentInChildren<UILabel> ();
+		labelValue.text = ((int)(UISlider.current.value * 300)).ToString () + " deg";
+		Debug.Log ("[ProgramController:SetAngle] ID: " + labelID.text + ", value: " + labelValue.text);
+		pv.RPC ("SetAngle", PhotonTargets.All, 1, UISlider.current.value * 300);
+	}
 }
