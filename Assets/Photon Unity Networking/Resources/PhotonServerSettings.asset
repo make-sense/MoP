@@ -34,4 +34,7 @@ MonoBehaviour:
   - RequestForPickupTimes
   - TaggedPlayer
   - Move
+  - Angle
+  - GetAngle
+  - SetAngle
   DisableAutoOpenWizard: 0

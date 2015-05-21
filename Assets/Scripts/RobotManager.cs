@@ -5,8 +5,15 @@ using System.Collections.Generic;
 public class RobotManager : MonoBehaviour {
 
 	UcrParser _parser = new UcrParser ();
-//	List<int> _motorAngle = new List<int> (new int[8]);
 	int[] _motorAngle = new int[8];
+
+	int[] MotorIndexToID = {1, 2, 11, 12, 13, 21, 22, 23};
+	int[] MotorIDToIndex = {-1,  0,  1, -1, -1, -1, -1, -1, -1, -1,
+	                        -1,  2,  3,  4, -1, -1, -1, -1, -1, -1,
+                            -1,  5,  6,  7, -1, -1, -1, -1, -1, -1};
+
+	int[] _angleMin = {0, 0, 0, 0, 0, 0, 0, 0};
+	int[] _angleMax = {360, 360, 360, 360, 360, 360, 360, 360};
 
 	public int GetSensorValue(int id) {
 		if (0 <= id && id < 8) {
@@ -91,6 +98,24 @@ public class RobotManager : MonoBehaviour {
 		float velocityRight = angular - linear;
 		CommunicationManager.Instance.Write (UcrParser.GetBuffDcSpeed (51, (int)(velocityLeft*100)));
 		CommunicationManager.Instance.Write (UcrParser.GetBuffDcSpeed (52, (int)(velocityRight*100)));
+	}
+
+	[RPC]
+	public void SetAngle (int id, int degree) {
+		Debug.Log ("[RobotManager:SetAngle] : (" + id + ", " + degree + ")");
+		if (MotorIDToIndex [id] != -1) {
+			if (degree < _angleMin[MotorIDToIndex[id]])
+				degree = _angleMin[MotorIDToIndex[id]];
+			else if (degree > _angleMax[MotorIDToIndex[id]])
+				degree = _angleMax[MotorIDToIndex[id]];
+			CommunicationManager.Instance.Write (UcrParser.GetBuffMotorAngle (id, degree));
+		}
+	}
+
+	[RPC]
+	public int GetAngle (int id) {
+		Debug.Log ("[RobotManager:GetAngle] : (" + id + ")");
+		return _motorAngle[MotorIDToIndex[id]];
 	}
 
 	public void Test () {
