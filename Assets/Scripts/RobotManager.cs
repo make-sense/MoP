@@ -12,8 +12,8 @@ public class RobotManager : MonoBehaviour {
 	                        -1,  2,  3,  4, -1, -1, -1, -1, -1, -1,
                             -1,  5,  6,  7, -1, -1, -1, -1, -1, -1};
 
-	int[] _angleMin = {0, 0, 0, 0, 0, 0, 0, 0};
-	int[] _angleMax = {360, 360, 360, 360, 360, 360, 360, 360};
+	int[] _angleMin = { 60, 100,  60, 150, 150, 110,  90,  90};
+	int[] _angleMax = {240, 180, 190, 220, 220, 240, 150, 150};
 
 	public int GetSensorValue(int id) {
 		if (0 <= id && id < 8) {
