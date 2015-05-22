@@ -79,7 +79,7 @@ public class RobotManager : MonoBehaviour {
 						_motorAngle[6] = protocol.value;
 					else if (protocol.id == 23) 
 						_motorAngle[7] = protocol.value;
-					Debug.Log ("[RobotManager:Update] Get sensor angle id " + protocol.id + " value " + protocol.value);
+//					Debug.Log ("[RobotManager:Update] Get sensor angle id " + protocol.id + " value " + protocol.value);
 					break;
 				}
 			}
