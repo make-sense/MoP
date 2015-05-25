@@ -43,7 +43,7 @@ MonoBehaviour:
   mSprites:
   - name: 1430501593_icon-6
     x: 1025
-    y: 1920
+    y: 1663
     width: 128
     height: 128
     borderLeft: 0
@@ -56,7 +56,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: 1430501599_icon-9
     x: 1025
-    y: 1791
+    y: 1534
     width: 128
     height: 128
     borderLeft: 0
@@ -68,8 +68,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: 1430501794_icon-3
-    x: 1025
-    y: 1662
+    x: 1282
+    y: 1920
     width: 128
     height: 128
     borderLeft: 0
@@ -81,8 +81,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Bluetooth
-    x: 1025
-    y: 1543
+    x: 1154
+    y: 1673
     width: 118
     height: 118
     borderLeft: 0
@@ -106,6 +106,32 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: joystick_bg
+    x: 1025
+    y: 1792
+    width: 256
+    height: 256
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 22
+    paddingRight: 22
+    paddingTop: 22
+    paddingBottom: 22
+  - name: joystick_thumb
+    x: 1282
+    y: 1791
+    width: 128
+    height: 128
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   mPixelSize: 1
   mReplacement: {fileID: 0}
   mCoordinates: 0
@@ -121,4 +147,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 191158}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

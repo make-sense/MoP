@@ -100,6 +100,10 @@ public class RobotManager : MonoBehaviour {
 		CommunicationManager.Instance.Write (UcrParser.GetBuffDcSpeed (52, (int)(velocityRight*100)));
 	}
 
+	public void JoystickMove (Vector2 joystick) {
+		Move (joystick.x, joystick.y);
+	}
+
 	[RPC]
 	public void SetAngle (int id, int degree) {
 		Debug.Log ("[RobotManager:SetAngle] : (" + id + ", " + degree + ")");
