@@ -10,7 +10,7 @@ public class MS_Joystick : MonoBehaviour {
 	int WidthHalf;
 	int HeightHalf;
 
-	public float DEAD_ZONE = 0.5f;
+	public float DEAD_ZONE = 0.2f;
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +24,11 @@ public class MS_Joystick : MonoBehaviour {
 //		Debug.Log ("OnPress " + pressed);
 		TouchProcess ();
 		Thumb.gameObject.SetActive (pressed);
+//		UISprite sprite = transform.GetComponentInChildren<UISprite> ();
+//		if (pressed)
+//			sprite.alpha = 1.0f;
+//		else
+//			sprite.alpha = 0.05f;
 	}
 
 	void OnDrag () {

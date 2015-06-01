@@ -80,6 +80,19 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: 16
+    x: 1283
+    y: 1740
+    width: 16
+    height: 16
+    borderLeft: 2
+    borderRight: 2
+    borderTop: 2
+    borderBottom: 2
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: Bluetooth
     x: 1316
     y: 1930
@@ -93,15 +106,41 @@ MonoBehaviour:
     paddingRight: 5
     paddingTop: 5
     paddingBottom: 5
+  - name: eye
+    x: 1316
+    y: 1827
+    width: 102
+    height: 102
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: eye_bg
+    x: 0
+    y: 907
+    width: 1080
+    height: 500
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: image0
     x: 0
     y: 1408
     width: 1024
     height: 640
-    borderLeft: 10
-    borderRight: 10
-    borderTop: 10
-    borderBottom: 10
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0

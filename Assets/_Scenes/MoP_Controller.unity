@@ -950,6 +950,22 @@ Prefab:
       propertyPath: Target
       value: 
       objectReference: {fileID: 1021477131}
+    - target: {fileID: 447598, guid: 6e3a4d1dc15894bb09c5e78bce9131ce, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -400
+      objectReference: {fileID: 0}
+    - target: {fileID: 447598, guid: 6e3a4d1dc15894bb09c5e78bce9131ce, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -150
+      objectReference: {fileID: 0}
+    - target: {fileID: 421290, guid: 6e3a4d1dc15894bb09c5e78bce9131ce, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 421290, guid: 6e3a4d1dc15894bb09c5e78bce9131ce, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -150
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e3a4d1dc15894bb09c5e78bce9131ce, type: 2}
   m_IsPrefabParent: 0
@@ -971,7 +987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &656597958
 Transform:
   m_ObjectHideFlags: 0
@@ -1249,7 +1265,7 @@ GameObject:
   - 4: {fileID: 936637579}
   - 114: {fileID: 936637578}
   m_Layer: 8
-  m_Name: SpriteBG
+  m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1292,7 +1308,7 @@ MonoBehaviour:
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.77777779
-  mType: 1
+  mType: 0
   mFillDirection: 4
   mFillAmount: 1
   mInvert: 0
