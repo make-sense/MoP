@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -91,6 +92,7 @@ public class RobotManager : MonoBehaviour {
 //		Debug.Log ("CurrentSensor " + strSensor);
 	}
 
+	DateTime lastMove;
 	[RPC]
 	public void Move (float linear, float angular) {
 		Debug.Log ("[RobotManager:Move] : (" + linear.ToString () + ", " + angular.ToString () + ")"); 
@@ -98,10 +100,31 @@ public class RobotManager : MonoBehaviour {
 		float velocityRight = angular - linear;
 		CommunicationManager.Instance.Write (UcrParser.GetBuffDcSpeed (51, (int)(velocityLeft*100)));
 		CommunicationManager.Instance.Write (UcrParser.GetBuffDcSpeed (52, (int)(velocityRight*100)));
+		CancelInvoke ("StopMobility");
+		Invoke ("StopMobility", 1f);
+		lastMove = DateTime.Now;
 	}
 
+	void StopMobility () {
+		if (DateTime.Now.Subtract(lastMove).TotalMilliseconds > 1000) {
+			Debug.Log ("Automatically Stop");
+			Move (0, 0);
+		}
+	}
+	
 	public void JoystickMove (Vector2 joystick) {
-		Move (joystick.x, joystick.y);
+		Move (joystick.y, joystick.x);
+	}
+
+	[RPC]
+	public void PanTilt (float pan, float tilt) {
+		Debug.Log ("[RobotManager:PanTilt] : (" + pan.ToString () + ", " + tilt.ToString () + ")"); 
+		CommunicationManager.Instance.Write (UcrParser.GetBuffMotorAngle (1, (int)(pan*90)+150));
+		CommunicationManager.Instance.Write (UcrParser.GetBuffMotorAngle (2, (int)(tilt*40)+150));
+	}
+
+	public void JoystickPanTilt (Vector2 pantilt) {
+		PanTilt (-pantilt.x, -pantilt.y);
 	}
 
 	[RPC]

@@ -19,6 +19,14 @@ public class ProgramController : MonoBehaviour {
 	
 	}
 
+	public void JoystickMove (Vector2 joystick) {
+		pv.RPC ("Move", PhotonTargets.Others, joystick.y, joystick.x);
+	}
+
+	public void JoystickPanTilt (Vector2 joystick) {
+		pv.RPC ("PanTilt", PhotonTargets.Others, -joystick.x, -joystick.y);
+	}
+
 	public void ArrowUp () {
 		Debug.Log ("[ProgramController:ArrowUp] 0.7f, 0ff");
 		pv.RPC ("Move", PhotonTargets.All, 0.7f, 0f);

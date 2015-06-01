@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11499500}
   - 65: {fileID: 6599504}
   - 114: {fileID: 11499504}
+  - 114: {fileID: 11485214}
   m_Layer: 8
   m_Name: Device
   m_TagString: Untagged
@@ -69,8 +70,21 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 250, y: 80, z: 0}
+  m_Size: {x: 400, y: 80, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11485214
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 0}
+  draggablePanel: {fileID: 0}
 --- !u!114 &11499500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,13 +115,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 250
+  mWidth: 400
   mHeight: 80
   mDepth: 1
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.125
+  aspectRatio: 5
   mType: 1
   mFillDirection: 4
   mFillAmount: 1
@@ -210,11 +224,7 @@ MonoBehaviour:
   pressedSprite2D: {fileID: 0}
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
-  onClick:
-  - mTarget: {fileID: 0}
-    mMethodName: Connect
-    mParameters: []
-    oneShot: 0
+  onClick: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -226,4 +236,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 199502}
   m_IsPrefabParent: 1
-  m_IsExploded: 1

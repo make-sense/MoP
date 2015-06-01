@@ -19,7 +19,7 @@ public class BTDeviceManager : MonoBehaviour {
 	}
 
 	IEnumerator ShowDevice () {
-		int height = 150;
+		int height = 0;
 		List<string> devices = null;
 #if UNITY_EDITOR
 		devices = new List<string> (new string[] {"This", "is", "device", "test"});
