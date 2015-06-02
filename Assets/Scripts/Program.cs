@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class Program : MonoBehaviour {
 
 	public UILabel[] labelSensors;
+	public Animation anim;
+	public AnimationClip animClip;
 
 	// Use this for initialization
 	void Start () {
