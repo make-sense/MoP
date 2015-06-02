@@ -6,6 +6,7 @@ public class MS_Joystick : MonoBehaviour {
 	public UISprite Thumb;
 	public GameObject Target;
 	public string Action;
+	bool enableTouchProcess;
 
 	int WidthHalf;
 	int HeightHalf;
@@ -21,18 +22,23 @@ public class MS_Joystick : MonoBehaviour {
 	}
 	
 	void OnPress (bool pressed) {
-//		Debug.Log ("OnPress " + pressed);
-		TouchProcess ();
+		Debug.Log ("OnPress " + pressed);
 		Thumb.gameObject.SetActive (pressed);
-//		UISprite sprite = transform.GetComponentInChildren<UISprite> ();
-//		if (pressed)
-//			sprite.alpha = 1.0f;
-//		else
-//			sprite.alpha = 0.05f;
+		if (pressed) {
+			enableTouchProcess = true;
+			StartCoroutine ("TargetAction");
+		} else {
+			enableTouchProcess = false;
+		}
 	}
 
-	void OnDrag () {
-		TouchProcess ();
+	IEnumerator TargetAction () {
+		while (enableTouchProcess) {
+			TouchProcess ();
+			yield return new WaitForSeconds(0.1f);
+		}
+		Target.SendMessage (Action, new Vector2 (0f, 0f));
+		yield return null;
 	}
 
 	void TouchProcess () {
