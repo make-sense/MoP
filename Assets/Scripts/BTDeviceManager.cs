@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class BTDeviceManager : MonoBehaviour {
 
 	public Transform devicePrefab;
+	List<Transform> deviceGOs = new List<Transform> ();
 		
 	void ConnectDevice () {
 		UILabel label = UIButton.current.GetComponentInChildren<UILabel> ();
@@ -19,6 +20,12 @@ public class BTDeviceManager : MonoBehaviour {
 	}
 
 	IEnumerator ShowDevice () {
+		if (deviceGOs.Count > 0) {
+			foreach (Transform t in deviceGOs)
+				GameObject.Destroy (t.gameObject);
+			deviceGOs.Clear ();
+		}
+
 		int height = 0;
 		List<string> devices = null;
 #if UNITY_EDITOR
@@ -39,7 +46,7 @@ public class BTDeviceManager : MonoBehaviour {
 			height -= 80;
 			UIButton button = t.GetComponentInChildren<UIButton> ();	
 			EventDelegate.Set (button.onClick, ConnectDevice);
-//			button.onClick += ConnectDevice;
+			deviceGOs.Add (t);
 			Debug.Log ("[BTDeviceManager:ShowDevice] " + device);
 		}
 	}

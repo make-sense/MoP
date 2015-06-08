@@ -106,7 +106,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106680}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 440, y: -187, z: 0}
+  m_LocalPosition: {x: 440, y: -166, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 490690}
@@ -119,7 +119,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -440, y: -187, z: 0}
+  m_LocalPosition: {x: -440, y: -166, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 495070}
@@ -201,7 +201,7 @@ MonoBehaviour:
     relative: 0
     absolute: 350
   updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: .501960814}
+  mColor: {r: 1, g: 1, b: 1, a: .117647059}
   mPivot: 4
   mWidth: 300
   mHeight: 300
@@ -251,7 +251,7 @@ MonoBehaviour:
     relative: 0
     absolute: 350
   updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: .501960814}
+  mColor: {r: 1, g: 1, b: 1, a: .117647059}
   mPivot: 4
   mWidth: 300
   mHeight: 300
@@ -337,7 +337,8 @@ MonoBehaviour:
   Thumb: {fileID: 11444140}
   Target: {fileID: 0}
   Action: JoystickMove
-  DEAD_ZONE: .200000003
+  SetZeroWhenRelease: 1
+  DEAD_ZONE: .100000001
 --- !u!114 &11470546
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -427,7 +428,8 @@ MonoBehaviour:
   Thumb: {fileID: 11470546}
   Target: {fileID: 0}
   Action: JoystickPanTilt
-  DEAD_ZONE: .200000003
+  SetZeroWhenRelease: 0
+  DEAD_ZONE: .100000001
 --- !u!114 &11493500
 MonoBehaviour:
   m_ObjectHideFlags: 1
