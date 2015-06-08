@@ -124,7 +124,7 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   AndroidKeystoreName: mop.keystore
-  AndroidKeyaliasName: 
+  AndroidKeyaliasName: mop
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1
