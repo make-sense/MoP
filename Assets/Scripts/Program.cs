@@ -17,6 +17,11 @@ public class Program : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKeyDown(KeyCode.Escape)) 
+		{
+			Application.Quit(); 
+		}
+
 		for (int i = 0 ; i < labelSensors.Length ; i++) {
 			try {
 				labelSensors[i].text = RobotManager.Instance.GetSensorValue(i).ToString ();
