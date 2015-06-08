@@ -6,6 +6,7 @@ public class MS_Joystick : MonoBehaviour {
 	public UISprite Thumb;
 	public GameObject Target;
 	public string Action;
+	public bool SetZeroWhenRelease;
 	bool enableTouchProcess;
 
 	int WidthHalf;
@@ -37,7 +38,8 @@ public class MS_Joystick : MonoBehaviour {
 			TouchProcess ();
 			yield return new WaitForSeconds(0.1f);
 		}
-		Target.SendMessage (Action, new Vector2 (0f, 0f));
+		if (SetZeroWhenRelease)
+			Target.SendMessage (Action, new Vector2 (0f, 0f));
 		yield return null;
 	}
 
