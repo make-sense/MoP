@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,48 +7,50 @@ public class BTDeviceManager : MonoBehaviour {
 
 	public Transform devicePrefab;
 	List<Transform> deviceGOs = new List<Transform> ();
-		
-	void ConnectDevice () {
-		UILabel label = UIButton.current.GetComponentInChildren<UILabel> ();
-		Debug.Log ("[BTDeviceManager:ConnectDevice] Connect device: " + label.text);
-#if !UNITY_EDITOR
-		AndroidManager.Instance.ConnectDevice (label.text);
-#endif
-	}
 
+	bool show;
+		
 	public void Show () {
 		StartCoroutine ("ShowDevice");
 	}
 
 	IEnumerator ShowDevice () {
-		if (deviceGOs.Count > 0) {
-			foreach (Transform t in deviceGOs)
-				GameObject.Destroy (t.gameObject);
-			deviceGOs.Clear ();
-		}
+		show = !show;
 
-		int height = 0;
-		List<string> devices = null;
-#if UNITY_EDITOR
-		devices = new List<string> (new string[] {"This", "is", "device", "test"});
-#endif
-		while (devices == null) {
-			devices = AndroidManager.Instance.GetDevice ();
-			yield return new WaitForSeconds(0.1f);
+		if (show)
+		{
+			if (deviceGOs.Count > 0) {
+				foreach (Transform t in deviceGOs)
+					GameObject.Destroy (t.gameObject);
+				deviceGOs.Clear ();
+			}
+
+			int height = 250;
+			List<string> devices = null;
+	#if UNITY_EDITOR
+			devices = new List<string> (new string[] {"This", "is", "device", "test"});
+	#endif
+			while (devices == null) {
+				devices = AndroidManager.Instance.GetDevice ();
+				yield return new WaitForSeconds(0.1f);
+			}
+			Debug.Log ("[BTDeviceManager:ShowDevice] Found device: " + devices.Count.ToString ());
+			foreach (string device in devices) {
+				Transform t = Instantiate (devicePrefab) as Transform;
+				t.parent = this.transform;
+				t.localPosition = new Vector2(0, height);
+				t.localScale = new Vector3(1, 1, 1);
+				Text text = t.GetComponentInChildren<Text> ();
+				text.text = device;
+				height -= 90;
+				deviceGOs.Add (t);
+				Debug.Log ("[BTDeviceManager:ShowDevice] " + device);
+			}
+			this.transform.localPosition = Vector3.zero;
 		}
-		Debug.Log ("[BTDeviceManager:ShowDevice] Found device: " + devices.Count.ToString ());
-		foreach (string device in devices) {
-			Transform t = Instantiate (devicePrefab) as Transform;
-			t.parent = this.transform;
-			t.localPosition = new Vector2(0, height);
-			t.localScale = new Vector3(1, 1, 1);
-			UILabel label = t.GetComponentInChildren<UILabel> ();
-			label.text = device;
-			height -= 80;
-			UIButton button = t.GetComponentInChildren<UIButton> ();	
-			EventDelegate.Set (button.onClick, ConnectDevice);
-			deviceGOs.Add (t);
-			Debug.Log ("[BTDeviceManager:ShowDevice] " + device);
+		else
+		{
+			this.transform.localPosition = new Vector3 (0, -1000, 0);
 		}
 	}
 }

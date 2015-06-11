@@ -24,6 +24,21 @@ public class CommunicationManager : MonoBehaviour {
 #endif
 	}
 
+	public bool Connect (string device)
+	{
+		return _comm.Connect (device);
+	}
+
+	public bool Disconnect () 
+	{
+		return _comm.Disconnect ();
+	}
+
+	public bool IsConnected ()
+	{
+		return _comm.IsConnected ();
+	}
+
 	public string[] GetDeviceList () {
 		return _comm.GetDeviceList ();
 	}

@@ -49,7 +49,11 @@ public class RobotManager : MonoBehaviour {
 //			strSensor += angle.ToString () + " ";
 //		}
 //		Debug.Log ("CurrentSensor2 " + strSensor);
-
+#if UNITY_ANDROID
+#if UNITY_EDITOR
+		return;
+#endif
+#endif
 		// update sensor value
 		byte[] buff = CommunicationManager.Instance.Read ();
 //		Debug.Log ("[RobotManager:Update] Read " + buff.Length.ToString ());

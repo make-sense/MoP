@@ -1,41 +1,93 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class MS_Joystick : MonoBehaviour {
+public class MS_Joystick : MonoBehaviour , IPointerUpHandler , IPointerDownHandler , IDragHandler {
 
-	public UISprite Thumb;
+    public int MovementRange = 100;
+
+    public enum AxisOption
+    {                                                    // Options for which axes to use                                                     
+        Both,                                                                   // Use both
+        OnlyHorizontal,                                                         // Only horizontal
+        OnlyVertical                                                            // Only vertical
+    }
+
+    AxisOption axesToUse = AxisOption.Both;   // The options for the axes that the still will use
+    string horizontalAxisName = "Horizontal";// The name given to the horizontal axis for the cross platform input
+    string verticalAxisName = "Vertical";    // The name given to the vertical axis for the cross platform input 
+
 	public GameObject Target;
 	public string Action;
 	public bool SetZeroWhenRelease;
 	bool enableTouchProcess;
 
-	int WidthHalf;
-	int HeightHalf;
+    private Vector3 startPos;
+	private Vector3 deltaPos;
+    private bool useX;                                                          // Toggle for using the x axis
+    private bool useY;                                                          // Toggle for using the Y axis
+      
+    void OnEnable () {
 
-	public float DEAD_ZONE = 0.2f;
+        startPos = transform.position;
+        CreateVirtualAxes ();
+    }
 
-	// Use this for initialization
-	void Start () {
-		Thumb.gameObject.SetActive (false);
-		UISprite sprite = GetComponentInChildren<UISprite> ();
-		WidthHalf = sprite.width/2;
-		HeightHalf = sprite.height/2;
-	}
-	
-	void OnPress (bool pressed) {
-		Debug.Log ("OnPress " + pressed);
-		Thumb.gameObject.SetActive (pressed);
-		if (pressed) {
-			enableTouchProcess = true;
-			StartCoroutine ("TargetAction");
-		} else {
-			enableTouchProcess = false;
-		}
-	}
+    private void UpdateVirtualAxes (Vector3 value) {
+
+		deltaPos = startPos - value;
+		deltaPos.x = -deltaPos.x;
+		deltaPos.y = -deltaPos.y;
+		deltaPos /= MovementRange;
+    }
+
+    private void CreateVirtualAxes()
+    {
+        // set axes to use
+        useX = (axesToUse == AxisOption.Both || axesToUse == AxisOption.OnlyHorizontal);
+        useY = (axesToUse == AxisOption.Both || axesToUse == AxisOption.OnlyVertical);
+    }
+
+
+    public  void OnDrag(PointerEventData data) {
+
+        Vector3 newPos = Vector3.zero;
+
+        if (useX) {
+            int delta = (int) (data.position.x - startPos.x);
+            delta = Mathf.Clamp(delta,  - MovementRange,  MovementRange);
+            newPos.x = delta;
+        }
+
+        if (useY)
+        {
+            int delta = (int)(data.position.y - startPos.y);
+            delta = Mathf.Clamp(delta, -MovementRange,  MovementRange);
+            newPos.y = delta;
+        }
+        transform.position = new Vector3(startPos.x + newPos.x , startPos.y + newPos.y , startPos.z + newPos.z);
+        UpdateVirtualAxes (transform.position);
+    }
+
+
+    public  void OnPointerUp(PointerEventData data)
+    {
+        transform.position = startPos;
+        UpdateVirtualAxes (startPos);
+		enableTouchProcess = false;
+    }
+
+
+    public  void OnPointerDown (PointerEventData data) {
+		startPos = data.position;
+		deltaPos = Vector3.zero;
+		enableTouchProcess = true;
+		StartCoroutine ("TargetAction");
+    }
 
 	IEnumerator TargetAction () {
 		while (enableTouchProcess) {
-			TouchProcess ();
+			Target.SendMessage (Action, new Vector2(deltaPos.x, deltaPos.y));
 			yield return new WaitForSeconds(0.1f);
 		}
 		if (SetZeroWhenRelease)
@@ -43,20 +95,6 @@ public class MS_Joystick : MonoBehaviour {
 		yield return null;
 	}
 
-	void TouchProcess () {
-		Vector2 touchPosition = TouchedLocalPosition ();
-		Thumb.transform.localPosition = new Vector3 (touchPosition.x*WidthHalf, touchPosition.y*HeightHalf, 0f);
-		Target.SendMessage (Action, touchPosition);
-	}
-
-	Vector2 TouchedLocalPosition () {
-		Vector3 v3 = transform.InverseTransformPoint (UICamera.lastHit.point);
-		Vector2 result = new Vector2 (v3.x / WidthHalf, v3.y / HeightHalf);
-		if (Mathf.Abs(result.x) < DEAD_ZONE)
-			result.x = 0.0f;
-		if (Mathf.Abs(result.y) < DEAD_ZONE)
-			result.y = 0.0f;
-//		Debug.Log ("TouchedLocalPosition: " + result);
-		return result;
-	}
+    void OnDisable () {
+    }
 }
