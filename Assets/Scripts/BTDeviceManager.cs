@@ -8,8 +8,31 @@ public class BTDeviceManager : MonoBehaviour {
 	public Transform devicePrefab;
 	List<Transform> deviceGOs = new List<Transform> ();
 
+	public Image btImage;
+	public Sprite BTDisconnected;
+	public Sprite BTConnecting;
+	public Sprite BTConnected;
+
+	void Start () {
+		StartCoroutine ("CheckConnection");
+	}
+
+	IEnumerator CheckConnection () {
+		while (true) {
+			if (AndroidManager.Instance.IsConnected ())
+				btImage.sprite = BTConnected;
+			else {
+				if (AndroidManager.Instance.BluetoothConnectingState == 2)
+					btImage.sprite = BTConnecting;
+				else if (AndroidManager.Instance.BluetoothConnectingState == 1)
+					btImage.sprite = BTDisconnected;
+			}
+			yield return new WaitForSeconds(1f);
+		}
+		yield return null;
+	}
+
 	bool show;
-		
 	public void Show () {
 		StartCoroutine ("ShowDevice");
 	}

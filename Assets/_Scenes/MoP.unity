@@ -162,6 +162,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   devicePrefab: {fileID: 22494994, guid: 50e65b56ad74041109fcfda47fdacd86, type: 2}
+  btImage: {fileID: 2128476682}
+  BTDisconnected: {fileID: 21300000, guid: 76c87c38606a1403fb88576924c358b9, type: 3}
+  BTConnecting: {fileID: 21300000, guid: 4e826252637fd45ce99cec41ba2d3035, type: 3}
+  BTConnected: {fileID: 21300000, guid: 029605c52b9804f65ab8bfe005cafdc5, type: 3}
 --- !u!1 &114305674
 GameObject:
   m_ObjectHideFlags: 0
@@ -1822,6 +1826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0796b9c1b57e42319c50df1923a74ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BluetoothConnectingState: 0
 --- !u!4 &2030137059
 Transform:
   m_ObjectHideFlags: 0
@@ -1846,7 +1851,7 @@ GameObject:
   - 114: {fileID: 2128476682}
   - 114: {fileID: 2128476681}
   m_Layer: 5
-  m_Name: BT Open
+  m_Name: BT List
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

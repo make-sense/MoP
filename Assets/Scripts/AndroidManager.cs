@@ -50,6 +50,7 @@ public class AndroidManager : MonoBehaviour {
 	private List<byte> _recvBuffer = new List<byte>();
 
 	private bool _isBluetoothConnected;
+	public int BluetoothConnectingState;
 //	private int _receivedData = -1;
 //	private bool _isReceivedMessage;
 	//------------------------------------------
@@ -82,11 +83,13 @@ public class AndroidManager : MonoBehaviour {
 	
 	public void ConnectDevice(string name)
 	{
+		BluetoothConnectingState = 2;
 		_ConnectBluetooth(name);
 	}
 	
 	public void DisconnectDevice()
 	{
+		BluetoothConnectingState = 1;
 		_DisconnectBluetooth();
 	}
 	
@@ -156,6 +159,15 @@ public class AndroidManager : MonoBehaviour {
 	
 	void BluetoothConnectState(string signal)
 	{
+		Debug.Log ("[AndroidManager::BluetoothConnectState] " + signal);
+		
+		if (signal == "BT_STATE_CONNECTED") {
+			BluetoothConnectingState = 3;
+			_isBluetoothConnected = true;
+		} else if (signal == "BT_STATE_NOTCONNECTED") {
+			BluetoothConnectingState = 1;
+			_isBluetoothConnected = false;
+		}
 	}
 	
 	void BluetoothData(string readData)
