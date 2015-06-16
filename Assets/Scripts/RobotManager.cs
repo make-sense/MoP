@@ -99,6 +99,8 @@ public class RobotManager : MonoBehaviour {
 	DateTime lastMove;
 	[RPC]
 	public void Move (float linear, float angular) {
+		linear *= 0.7f;
+		angular *= 0.5f;
 		Debug.Log ("[RobotManager:Move] : (" + linear.ToString () + ", " + angular.ToString () + ")"); 
 		float velocityLeft = angular + linear;
 		float velocityRight = angular - linear;

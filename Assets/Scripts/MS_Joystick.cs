@@ -26,10 +26,12 @@ public class MS_Joystick : MonoBehaviour , IPointerUpHandler , IPointerDownHandl
 	private Vector3 deltaPos;
     private bool useX;                                                          // Toggle for using the x axis
     private bool useY;                                                          // Toggle for using the Y axis
-      
-    void OnEnable () {
 
-        startPos = transform.position;
+	Vector3 FixPos = new Vector3 ();
+
+    void OnEnable () {
+		FixPos = transform.localPosition;
+		startPos = transform.position;
         CreateVirtualAxes ();
     }
 
@@ -72,8 +74,9 @@ public class MS_Joystick : MonoBehaviour , IPointerUpHandler , IPointerDownHandl
 
     public  void OnPointerUp(PointerEventData data)
     {
-        transform.position = startPos;
-        UpdateVirtualAxes (startPos);
+//		transform.position = FixPos;
+		transform.localPosition = FixPos;
+		UpdateVirtualAxes (FixPos);
 		enableTouchProcess = false;
     }
 

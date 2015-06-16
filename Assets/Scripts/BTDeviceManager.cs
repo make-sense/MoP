@@ -69,11 +69,6 @@ public class BTDeviceManager : MonoBehaviour {
 				deviceGOs.Add (t);
 				Debug.Log ("[BTDeviceManager:ShowDevice] " + device);
 			}
-			this.transform.localPosition = Vector3.zero;
-		}
-		else
-		{
-			this.transform.localPosition = new Vector3 (0, -1000, 0);
 		}
 	}
 }
