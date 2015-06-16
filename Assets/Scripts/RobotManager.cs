@@ -184,5 +184,4 @@ public class RobotManager : MonoBehaviour {
 			return _instance;
 		}
 	}
-
 }
