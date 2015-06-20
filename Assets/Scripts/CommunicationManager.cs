@@ -22,6 +22,8 @@ public class CommunicationManager : MonoBehaviour {
 			Debug.Log (device);
 		}
 #endif
+		if (SettingManager.Instance.SelectedDevice.Length > 0)
+			Connect (SettingManager.Instance.SelectedDevice);
 	}
 
 	public bool Connect (string device)

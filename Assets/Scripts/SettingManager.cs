@@ -4,6 +4,7 @@ using System.Collections;
 public class SettingManager : MonoBehaviour {
 
 	const string Key_JoystickType = "Key_JoystickType";
+	const string Key_SelectedDevice = "Key_SelectedDevice";
 
 	public bool JoystickType {
 		get {
@@ -19,6 +20,17 @@ public class SettingManager : MonoBehaviour {
 				PlayerPrefs.SetInt (Key_JoystickType, 1);
 			else
 				PlayerPrefs.SetInt (Key_JoystickType, 0);
+		}
+	}
+
+	public string SelectedDevice {
+		get {
+			if (!PlayerPrefs.HasKey (Key_SelectedDevice))
+				PlayerPrefs.SetString (Key_SelectedDevice, "");
+			return PlayerPrefs.GetString (Key_SelectedDevice);
+		}
+		set {
+			PlayerPrefs.SetString (Key_SelectedDevice, value);
 		}
 	}
 
