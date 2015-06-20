@@ -22,19 +22,23 @@ public class Program : MonoBehaviour {
 		}
 	}
 
-	public void Forward () {
-		RobotManager.Instance.Move (0.7f, 0);
-	}
-	
-	public void Backward () {
+	public void Stop () {
 		RobotManager.Instance.Move (0, 0);
 	}
 	
+	public void Forward () {
+		RobotManager.Instance.Move (1f, 0);
+	}
+	
+	public void Backward () {
+		RobotManager.Instance.Move (-1f, 0);
+	}
+	
 	public void RightTurn () {
-		RobotManager.Instance.Move (0, 0.9f);
+		RobotManager.Instance.Move (0, 1f);
 	}
 	
 	public void LeftTurn () {
-		RobotManager.Instance.Move (0, -0.9f);
+		RobotManager.Instance.Move (0, -1f);
 	}
 }
