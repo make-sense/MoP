@@ -99,16 +99,15 @@ public class RobotManager : MonoBehaviour {
 	DateTime lastMove;
 	[RPC]
 	public void Move (float linear, float angular) {
-		linear *= 0.7f;
-		angular *= 0.5f;
 		Debug.Log ("[RobotManager:Move] : (" + linear.ToString () + ", " + angular.ToString () + ")"); 
 		float velocityLeft = angular + linear;
 		float velocityRight = angular - linear;
 		CommunicationManager.Instance.Write (UcrParser.GetBuffDcSpeed (51, (int)(velocityLeft*100)));
 		CommunicationManager.Instance.Write (UcrParser.GetBuffDcSpeed (52, (int)(velocityRight*100)));
-		CancelInvoke ("StopMobility");
-		Invoke ("StopMobility", 1f);
-		lastMove = DateTime.Now;
+		Debug.Log ("[RobotManager:Move] : (" + linear + ", " + angular + ") => (" + velocityLeft + ", " + velocityRight + ")");
+		//		CancelInvoke ("StopMobility");
+//		Invoke ("StopMobility", 1f);
+//		lastMove = DateTime.Now;
 	}
 
 	void StopMobility () {
@@ -119,7 +118,7 @@ public class RobotManager : MonoBehaviour {
 	}
 	
 	public void JoystickMove (Vector2 joystick) {
-		Move (joystick.y, joystick.x);
+		Move (joystick.y*0.7f, joystick.x*0.5f);
 	}
 
 	[RPC]

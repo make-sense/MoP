@@ -15,19 +15,23 @@ public class CommunicationManager : MonoBehaviour {
 		throw new System.NotImplementedException("Not implemented except android and windows");
 #endif
 
-#if !UNITY_EDITOR
-		string [] devices = _comm.GetDeviceList ();
-		Debug.Log ("[CommunicationManager::Start] device count is " + devices.Length);
-		foreach (string device in devices) {
-			Debug.Log (device);
-		}
-#endif
-		if (SettingManager.Instance.SelectedDevice.Length > 0)
+//#if !UNITY_EDITOR
+//		string [] devices = _comm.GetDeviceList ();
+//		Debug.Log ("[CommunicationManager::Start] device count is " + devices.Length);
+//		foreach (string device in devices) {
+//			Debug.Log (device);
+//		}
+//#endif
+		Debug.Log ("SelectedDevice: " + SettingManager.Instance.SelectedDevice);
+		if (SettingManager.Instance.SelectedDevice.Length > 0) 
+		{
 			Connect (SettingManager.Instance.SelectedDevice);
+		}
 	}
 
 	public bool Connect (string device)
 	{
+		Debug.Log ("[CommunicationManager:Connect] Connect to device");
 		return _comm.Connect (device);
 	}
 
