@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class JoystickManager : MonoBehaviour {
@@ -8,30 +9,24 @@ public class JoystickManager : MonoBehaviour {
 	public GameObject BoxyMobility;
 	public GameObject BoxyFunction;
 
-	public UnityEngine.UI.Text mode;
-		
+	public Slider slider;
+
 	void Start () {
-		EnableMop (SettingManager.Instance.JoystickType);
+		slider.value = SettingManager.Instance.JoystickType;
 	}
 
 	public void ToggleJoystick () {
-		SettingManager.Instance.JoystickType = !SettingManager.Instance.JoystickType;
-		EnableMop (SettingManager.Instance.JoystickType);
+		SettingManager.Instance.JoystickType = (int)slider.value;
+		SetJoystick (SettingManager.Instance.JoystickType);
 	}
 
-	public void SelectMop () {
-		EnableMop (true);
-	}
-
-	public void SelectBoxy () {
-		EnableMop (false);
-	}
-
-	public void EnableMop (bool mopEnable) {
-		if (mopEnable)
+	public void SetJoystick (int joystickMode) {
+		Text mode = slider.GetComponentInChildren <Text> ();
+		if (joystickMode == 0)
 			mode.text = "M";
 		else
 			mode.text = "B";
+		bool mopEnable = (joystickMode==0);
 		MopMobility.SetActive (mopEnable);
 		MopPanTilt.SetActive (mopEnable);
 		BoxyMobility.SetActive (!mopEnable);

@@ -6,20 +6,14 @@ public class SettingManager : MonoBehaviour {
 	const string Key_JoystickType = "Key_JoystickType";
 	const string Key_SelectedDevice = "Key_SelectedDevice";
 
-	public bool JoystickType {
+	public int JoystickType {
 		get {
 			if (!PlayerPrefs.HasKey (Key_JoystickType))
-				PlayerPrefs.SetInt (Key_JoystickType, 1);
-			if (PlayerPrefs.GetInt (Key_JoystickType) == 0)
-				return false;
-			else
-				return true;
+				PlayerPrefs.SetInt (Key_JoystickType, 0);
+			return PlayerPrefs.GetInt (Key_JoystickType);
 		}
 		set {
-			if (value)
-				PlayerPrefs.SetInt (Key_JoystickType, 1);
-			else
-				PlayerPrefs.SetInt (Key_JoystickType, 0);
+			PlayerPrefs.SetInt (Key_JoystickType, value);
 		}
 	}
 
