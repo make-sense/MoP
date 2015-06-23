@@ -27,7 +27,6 @@ public class Program : MonoBehaviour {
 	}
 	
 	public void Forward () {
-<<<<<<< HEAD
 		RobotManager.Instance.Move (0.5f, 0);
 	}
 	
@@ -45,24 +44,5 @@ public class Program : MonoBehaviour {
 
 	public void Shoot () {
 		RobotManager.Instance.Move (1f, 0);
-=======
-		RobotManager.Instance.Move (0.7f, 0);
-	}
-	
-	public void Backward () {
-		RobotManager.Instance.Move (-0.7f, 0);
-	}
-	
-	public void RightTurn () {
-		RobotManager.Instance.Move (0, 0.7f);
-	}
-	
-	public void LeftTurn () {
-		RobotManager.Instance.Move (0, -0.7f);
-	}
-
-	public void Shoot () {
-		RobotManager.Instance.Move (0.99f, 0);
->>>>>>> origin/master
 	}
 }
