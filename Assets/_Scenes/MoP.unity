@@ -648,6 +648,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   animClip: {fileID: 0}
+  linearVelocity: .699999988
+  angularVelocity: .5
 --- !u!224 &644936808 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22479134, guid: bce15df89f5bd4899aab8a9b47d7dffe,
