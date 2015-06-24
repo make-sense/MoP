@@ -8,6 +8,9 @@ public class Program : MonoBehaviour {
 	public Animation anim;
 	public AnimationClip animClip;
 
+	public float linearVelocity = 0.7f;
+	public float angularVelocity = 0.5f;
+
 	// Use this for initialization
 	void Start () {
 		Debug.Log ("[Program:Start]");
@@ -27,19 +30,19 @@ public class Program : MonoBehaviour {
 	}
 	
 	public void Forward () {
-		RobotManager.Instance.Move (0.5f, 0);
+		RobotManager.Instance.Move (linearVelocity, 0);
 	}
 	
 	public void Backward () {
-		RobotManager.Instance.Move (-0.5f, 0);
+		RobotManager.Instance.Move (-linearVelocity, 0);
 	}
 	
 	public void RightTurn () {
-		RobotManager.Instance.Move (0, 0.4f);
+		RobotManager.Instance.Move (0, angularVelocity);
 	}
 	
 	public void LeftTurn () {
-		RobotManager.Instance.Move (0, -0.4f);
+		RobotManager.Instance.Move (0, -angularVelocity);
 	}
 
 	public void Shoot () {
