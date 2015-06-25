@@ -19,6 +19,25 @@ public class ProgramController : MonoBehaviour {
 	
 	}
 
+	bool enableSync;
+	IEnumerator SyncMotion () {
+		enableSync = true;
+		while (enableSync) {
+			SyncArmMotor ();
+			yield return new WaitForSeconds (0.1f);
+		}
+		yield return null;
+	}
+
+	void SyncArmMotor () {
+		for (int i = 2; i < 8; i++) 
+		{
+			int angle = MotionSensorManager.Instance.GetSensorValue (i);
+			pv.RPC ("SetAngle", PhotonTargets.Others, i, angle);
+		}
+	}
+	
+
 	public void JoystickMove (Vector2 joystick) {
 		Debug.Log ("[ProgramController:JoystickMove] " + joystick.ToString ());
 		pv.RPC ("Move", PhotonTargets.Others, joystick.y, joystick.x);
@@ -31,22 +50,22 @@ public class ProgramController : MonoBehaviour {
 
 	public void ArrowUp () {
 		Debug.Log ("[ProgramController:ArrowUp] 0.7f, 0ff");
-		pv.RPC ("Move", PhotonTargets.All, 0.7f, 0f);
+		pv.RPC ("Move", PhotonTargets.Others, 0.7f, 0f);
 	}
 	
 	public void ArrowDown () {
 		Debug.Log ("[ProgramController:ArrowDown] 0f, 0.9f");
-		pv.RPC ("Move", PhotonTargets.All, 0f, 0f);
+		pv.RPC ("Move", PhotonTargets.Others, 0f, 0f);
 	}
 	
 	public void ArrowLeft () {
 		Debug.Log ("[ProgramController:ArrowLeft] 0f, -0.9f");
-		pv.RPC ("Move", PhotonTargets.All, 0f, -0.9f);
+		pv.RPC ("Move", PhotonTargets.Others, 0f, -0.9f);
 	}
 	
 	public void ArrowRight () {
 		Debug.Log ("[ProgramController:ArrowRight] 0f, 0.9f");
-		pv.RPC ("Move", PhotonTargets.All, 0f, 0.9f);
+		pv.RPC ("Move", PhotonTargets.Others, 0f, 0.9f);
 	}
 
 	public void SetAngle () {
