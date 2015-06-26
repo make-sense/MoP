@@ -6,7 +6,7 @@ public class CommunicationManager : MonoBehaviour {
 	CommunicationBase _comm;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 #if UNITY_ANDROID
 		_comm = new AndroidCommunication ();
 #elif UNITY_STANDALONE
@@ -22,6 +22,13 @@ public class CommunicationManager : MonoBehaviour {
 //			Debug.Log (device);
 //		}
 //#endif
+	}
+
+	void Start () {
+		Invoke ("AutoConnect", 1f);
+	}
+
+	void AutoConnect () {
 		Debug.Log ("SelectedDevice: " + SettingManager.Instance.SelectedDevice);
 		if (SettingManager.Instance.SelectedDevice.Length > 0) 
 		{

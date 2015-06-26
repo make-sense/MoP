@@ -20,7 +20,11 @@ public class AndroidCommunication : CommunicationBase {
 
 	public override string[] GetDeviceList () {
 //		Debug.Log ("[AndroidCommunication::GetDeviceList]");
-		return AndroidManager.Instance.GetDevice ().ToArray ();
+		try {
+			return AndroidManager.Instance.GetDevice ().ToArray ();
+		} catch (System.Exception e) {
+			return null;
+		}
 	}
 	
 	public override int Read (out byte[] bytes, int len) {

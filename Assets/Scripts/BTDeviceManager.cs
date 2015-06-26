@@ -19,13 +19,13 @@ public class BTDeviceManager : MonoBehaviour {
 
 	IEnumerator CheckConnection () {
 		while (true) {
-			if (AndroidManager.Instance.IsConnected ())
+			if (CommunicationManager.Instance.IsConnected ())
 				btImage.sprite = BTConnected;
 			else {
-				if (AndroidManager.Instance.BluetoothConnectingState == 2)
-					btImage.sprite = BTConnecting;
-				else if (AndroidManager.Instance.BluetoothConnectingState == 1)
-					btImage.sprite = BTDisconnected;
+//				if (AndroidManager.Instance.BluetoothConnectingState == 2)
+//					btImage.sprite = BTConnecting;
+//				else if (AndroidManager.Instance.BluetoothConnectingState == 1)
+//					btImage.sprite = BTDisconnected;
 			}
 			yield return new WaitForSeconds(1f);
 		}
@@ -49,15 +49,15 @@ public class BTDeviceManager : MonoBehaviour {
 			}
 
 			int height = 250;
-			List<string> devices = null;
-	#if UNITY_EDITOR
-			devices = new List<string> (new string[] {"This", "is", "device", "test"});
-	#endif
+			string[] devices = null;
+#if UNITY_ANDROID && UNITY_EDITOR
+			devices = new string[] {"This", "is", "device", "test"};
+#endif
 			while (devices == null) {
-				devices = AndroidManager.Instance.GetDevice ();
+				devices = CommunicationManager.Instance.GetDeviceList ();
 				yield return new WaitForSeconds(0.1f);
 			}
-			Debug.Log ("[BTDeviceManager:ShowDevice] Found device: " + devices.Count.ToString ());
+			Debug.Log ("[BTDeviceManager:ShowDevice] Found device: " + devices.Length);
 			foreach (string device in devices) {
 				Transform t = Instantiate (devicePrefab) as Transform;
 				t.parent = this.transform;

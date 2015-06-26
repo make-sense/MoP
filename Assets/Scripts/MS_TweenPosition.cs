@@ -59,7 +59,7 @@ public class MS_TweenPosition : MonoBehaviour {
 	}
 
 	bool IsNear (Vector3 from, Vector3 to) {
-		Debug.Log ("IsNear: " + Vector3.Distance (from, to));
+//		Debug.Log ("IsNear: " + Vector3.Distance (from, to));
 		if (Vector3.Distance (from, to) < DISTANCE_THRESHOLD)
 			return true;
 		return false;
