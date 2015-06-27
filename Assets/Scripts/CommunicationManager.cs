@@ -61,8 +61,9 @@ public class CommunicationManager : MonoBehaviour {
 	}
 
 	public byte[] Read () {
-		byte[] buff;
-		int nRead = _comm.Read (out buff, 2048);
+		byte[] buff = new byte[2048];
+		if (IsConnected ())
+			_comm.Read (ref buff, 2048);
 //		Debug.Log ("[CommunicationManager:Read] nRead " + nRead.ToString ());
 		return buff;
 	}

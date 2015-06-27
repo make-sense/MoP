@@ -123,7 +123,7 @@ public class AndroidManager : MonoBehaviour {
 		}
 	}
 	
-	public int Recv(out byte[] buff, int len)
+	public int Recv(ref byte[] buff, int len)
 	{
 		int count = _recvBuffer.Count;
 		int copyLength = (len < count) ? len : count;
@@ -223,9 +223,8 @@ public class AndroidManager : MonoBehaviour {
 
 	public void Send(byte[] buff) { }
 	
-	public int Recv(out byte[] buff, int len)
+	public int Recv(ref byte[] buff, int len)
 	{
-		buff = new byte[1];
 		return 0;
 	}
 #endif

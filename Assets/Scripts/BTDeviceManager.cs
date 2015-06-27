@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -53,9 +54,12 @@ public class BTDeviceManager : MonoBehaviour {
 #if UNITY_ANDROID && UNITY_EDITOR
 			devices = new string[] {"This", "is", "device", "test"};
 #endif
+			DateTime startTime = DateTime.Now;
 			while (devices == null) {
 				devices = CommunicationManager.Instance.GetDeviceList ();
 				yield return new WaitForSeconds(0.1f);
+				if (DateTime.Now.Subtract(startTime).TotalSeconds > 3)
+					break;
 			}
 			Debug.Log ("[BTDeviceManager:ShowDevice] Found device: " + devices.Length);
 			foreach (string device in devices) {

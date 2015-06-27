@@ -27,9 +27,9 @@ public class AndroidCommunication : CommunicationBase {
 		}
 	}
 	
-	public override int Read (out byte[] bytes, int len) {
+	public override int Read (ref byte[] bytes, int len) {
 //		Debug.Log ("[AndroidCommunication::Read]");
-		return AndroidManager.Instance.Recv (out bytes, len);
+		return AndroidManager.Instance.Recv (ref bytes, len);
 	}
 	
 	public override int Write (byte[] bytes, int len) {
