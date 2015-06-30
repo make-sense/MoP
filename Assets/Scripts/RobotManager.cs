@@ -38,7 +38,8 @@ public class RobotManager : MonoBehaviour {
 //				strSensor += angle.ToString () + " ";
 //			}
 //			Debug.Log ("CurrentSensor4 " + strSensor);
-			yield return new WaitForSeconds(1f);
+			Process ();
+			yield return new WaitForSeconds(0.1f);
 		}
 		yield return null;
 	}
@@ -54,6 +55,11 @@ public class RobotManager : MonoBehaviour {
 		return;
 #endif
 #endif
+	}
+
+	void Process () {
+		if (!CommunicationManager.Instance.IsConnected ())
+			return;
 		// update sensor value
 		byte[] buff = CommunicationManager.Instance.Read ();
 //		Debug.Log ("[RobotManager:Update] Read " + buff.Length.ToString ());

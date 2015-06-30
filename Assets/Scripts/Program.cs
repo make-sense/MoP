@@ -48,4 +48,8 @@ public class Program : MonoBehaviour {
 	public void Shoot () {
 		RobotManager.Instance.Move (1f, 0);
 	}
+
+	public void ChangeToControlMode () {
+		Application.LoadLevel ("MoP_Controller");
+	}
 }

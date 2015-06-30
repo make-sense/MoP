@@ -75,4 +75,8 @@ public class ProgramController : MonoBehaviour {
 //		Debug.Log ("[ProgramController:SetAngle] ID: " + labelID.text + ", value: " + labelValue.text);
 //		pv.RPC ("SetAngle", PhotonTargets.All, System.Convert.ToInt32(labelID.text), (int)(UISlider.current.value * 300));
 	}
+
+	public void ChangeToPlayMode () {
+		Application.LoadLevel ("MoP");
+	}
 }

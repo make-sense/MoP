@@ -13,6 +13,8 @@ public class SerialCommunication : CommunicationBase {
 		try {
 			serialPort.BaudRate = 57600;
 			serialPort.PortName = device;
+			serialPort.ReadTimeout = 10;
+			serialPort.WriteTimeout = 10;
 			serialPort.Open ();
 			if (serialPort.IsOpen)
 				return true;

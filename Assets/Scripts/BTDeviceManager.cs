@@ -64,7 +64,7 @@ public class BTDeviceManager : MonoBehaviour {
 			Debug.Log ("[BTDeviceManager:ShowDevice] Found device: " + devices.Length);
 			foreach (string device in devices) {
 				Transform t = Instantiate (devicePrefab) as Transform;
-				t.parent = this.transform;
+				t.SetParent (this.transform);
 				t.localPosition = new Vector2(0, height);
 				t.localScale = new Vector3(1, 1, 1);
 				Text text = t.GetComponentInChildren<Text> ();
