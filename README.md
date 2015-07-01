@@ -1,2 +1,0 @@
-# MoP
-Robot MoP App
