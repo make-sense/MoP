@@ -4,10 +4,10 @@ using System.Collections;
 public class MotionSensorManager : MonoBehaviour {
 
 	UcrParser _parser = new UcrParser ();
-	int[] _motorAngle = new int[8];
+	int[] _motorAngle = {150, 150, 150, 150, 150, 150, 150, 150};
 	
-	int[] MotorIndexToID = {1, 2, 11, 12, 13, 21, 22, 23};
-	int[] MotorIDToIndex = {-1,  0,  1, -1, -1, -1, -1, -1, -1, -1,
+	public static int[] MotorIndexToID = {1, 2, 11, 12, 13, 21, 22, 23};
+	public static int[] MotorIDToIndex = {-1,  0,  1, -1, -1, -1, -1, -1, -1, -1,
 		-1,  2,  3,  4, -1, -1, -1, -1, -1, -1,
 		-1,  5,  6,  7, -1, -1, -1, -1, -1, -1};
 	

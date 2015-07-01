@@ -44,7 +44,7 @@ public class ProgramController : MonoBehaviour {
 		for (int i = 2; i < 8; i++) 
 		{
 			int angle = MotionSensorManager.Instance.GetSensorValue (i);
-			pv.RPC ("SetAngle", PhotonTargets.Others, i, angle);
+			pv.RPC ("SetAngle", PhotonTargets.Others, MotionSensorManager.MotorIndexToID[i], angle);
 		}
 	}
 
