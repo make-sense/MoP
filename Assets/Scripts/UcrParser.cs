@@ -28,6 +28,7 @@ public class UcrParser {
 	public const int MS_DIGITAL_OUT = 0xa1;
 	
 	public const int MS_SENSOR_ANGLE = 0x45;
+	public const int MS_SENSOR_TOUCH = 0x91;
 	public const int MS_SENSOR_DISTANCE = 0x93;
 	public const int MS_SENSOR_IR = 0x96;
 	public const int MS_SENSOR_BATTERY = 0xb1;

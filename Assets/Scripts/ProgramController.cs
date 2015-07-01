@@ -15,6 +15,11 @@ public class ProgramController : MonoBehaviour {
 	public Text Mot22;
 	public Text Mot23;
 
+	public Image touch;
+
+	Color green = new Color (26f/255f, 242f/255f, 102f/255f);
+	Color red   = new Color (209f/255f, 95f/255f, 93f/255f);
+
 	void Awake () {
 		pv = GetComponent<PhotonView> ();
 	}
@@ -33,8 +38,12 @@ public class ProgramController : MonoBehaviour {
 	IEnumerator SyncMotion () {
 		enableSync = true;
 		while (enableSync) {
+			if (MotionSensorManager.Instance.Touch[0] > 0)
+				SyncArmMotor ();
+
 			DisplayMotorAngle ();
-			SyncArmMotor ();
+			DisplayTouch ();
+
 			yield return new WaitForSeconds (0.1f);
 		}
 		yield return null;
@@ -43,28 +52,37 @@ public class ProgramController : MonoBehaviour {
 	void SyncArmMotor () {
 		for (int i = 2; i < 8; i++) 
 		{
-			int angle = MotionSensorManager.Instance.GetSensorValue (i);
+			int angle = MotionSensorManager.Instance.Angle [i];
 			pv.RPC ("SetAngle", PhotonTargets.Others, MotionSensorManager.MotorIndexToID[i], angle);
 		}
 	}
 
 	void DisplayMotorAngle () {
 		if (Mot1 != null)
-			Mot1.text = MotionSensorManager.Instance.GetSensorValue (0).ToString ();
+			Mot1.text = MotionSensorManager.Instance.Angle [0].ToString ();
 		if (Mot2 != null)
-			Mot2.text = MotionSensorManager.Instance.GetSensorValue (1).ToString ();
+			Mot2.text = MotionSensorManager.Instance.Angle [1].ToString ();
 		if (Mot11 != null)
-			Mot11.text = MotionSensorManager.Instance.GetSensorValue (2).ToString ();
+			Mot11.text = MotionSensorManager.Instance.Angle [2].ToString ();
 		if (Mot12 != null)
-			Mot12.text = MotionSensorManager.Instance.GetSensorValue (3).ToString ();
+			Mot12.text = MotionSensorManager.Instance.Angle [3].ToString ();
 		if (Mot13 != null)
-			Mot13.text = MotionSensorManager.Instance.GetSensorValue (4).ToString ();
+			Mot13.text = MotionSensorManager.Instance.Angle [4].ToString ();
 		if (Mot21 != null)
-			Mot21.text = MotionSensorManager.Instance.GetSensorValue (5).ToString ();
+			Mot21.text = MotionSensorManager.Instance.Angle [5].ToString ();
 		if (Mot22 != null)
-			Mot22.text = MotionSensorManager.Instance.GetSensorValue (6).ToString ();
+			Mot22.text = MotionSensorManager.Instance.Angle [6].ToString ();
 		if (Mot23 != null)
-			Mot23.text = MotionSensorManager.Instance.GetSensorValue (7).ToString ();
+			Mot23.text = MotionSensorManager.Instance.Angle [7].ToString ();
+	}
+
+	void DisplayTouch () {
+		if (touch != null) {
+			if (MotionSensorManager.Instance.Touch[0] > 0)
+				touch.color = red;
+			else
+				touch.color = green;
+		}
 	}
 
 	public void JoystickMove (Vector2 joystick) {
