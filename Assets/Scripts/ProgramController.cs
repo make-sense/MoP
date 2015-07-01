@@ -1,9 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class ProgramController : MonoBehaviour {
 
 	PhotonView pv;
+
+	public Text Mot1;
+	public Text Mot2;
+	public Text Mot11;
+	public Text Mot12;
+	public Text Mot13;
+	public Text Mot21;
+	public Text Mot22;
+	public Text Mot23;
 
 	void Awake () {
 		pv = GetComponent<PhotonView> ();
@@ -11,7 +21,7 @@ public class ProgramController : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-	
+		StartCoroutine ("SyncMotion");
 	}
 	
 	// Update is called once per frame
@@ -23,6 +33,7 @@ public class ProgramController : MonoBehaviour {
 	IEnumerator SyncMotion () {
 		enableSync = true;
 		while (enableSync) {
+			DisplayMotorAngle ();
 			SyncArmMotor ();
 			yield return new WaitForSeconds (0.1f);
 		}
@@ -36,7 +47,25 @@ public class ProgramController : MonoBehaviour {
 			pv.RPC ("SetAngle", PhotonTargets.Others, i, angle);
 		}
 	}
-	
+
+	void DisplayMotorAngle () {
+		if (Mot1 != null)
+			Mot1.text = MotionSensorManager.Instance.GetSensorValue (0).ToString ();
+		if (Mot2 != null)
+			Mot2.text = MotionSensorManager.Instance.GetSensorValue (1).ToString ();
+		if (Mot11 != null)
+			Mot11.text = MotionSensorManager.Instance.GetSensorValue (2).ToString ();
+		if (Mot12 != null)
+			Mot12.text = MotionSensorManager.Instance.GetSensorValue (3).ToString ();
+		if (Mot13 != null)
+			Mot13.text = MotionSensorManager.Instance.GetSensorValue (4).ToString ();
+		if (Mot21 != null)
+			Mot21.text = MotionSensorManager.Instance.GetSensorValue (5).ToString ();
+		if (Mot22 != null)
+			Mot22.text = MotionSensorManager.Instance.GetSensorValue (6).ToString ();
+		if (Mot23 != null)
+			Mot23.text = MotionSensorManager.Instance.GetSensorValue (7).ToString ();
+	}
 
 	public void JoystickMove (Vector2 joystick) {
 		Debug.Log ("[ProgramController:JoystickMove] " + joystick.ToString ());

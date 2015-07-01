@@ -26,7 +26,7 @@ public class BTDeviceManager : MonoBehaviour {
 //				if (AndroidManager.Instance.BluetoothConnectingState == 2)
 //					btImage.sprite = BTConnecting;
 //				else if (AndroidManager.Instance.BluetoothConnectingState == 1)
-//					btImage.sprite = BTDisconnected;
+				btImage.sprite = BTDisconnected;
 			}
 			yield return new WaitForSeconds(1f);
 		}
