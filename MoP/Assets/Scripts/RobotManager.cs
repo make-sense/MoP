@@ -7,6 +7,7 @@ public class RobotManager : MonoBehaviour {
 
 	UcrParser _parser = new UcrParser ();
 	int[] _motorAngle = {150, 150, 150, 150, 150, 150, 150, 150};
+	int[] _touchSensor = {0};
 
 	int[] MotorIndexToID = {1, 2, 11, 12, 13, 21, 22, 23};
 	int[] MotorIDToIndex = {-1,  0,  1, -1, -1, -1, -1, -1, -1, -1,
@@ -16,6 +17,18 @@ public class RobotManager : MonoBehaviour {
 	int[] _angleMin = { 60, 100,  60, 150, 150, 110,  90,  90};
 	int[] _angleMax = {240, 180, 190, 220, 220, 240, 150, 150};
 
+	public int[] Angle {
+		get {
+			return _motorAngle;
+		}
+	}
+	
+	public int[] Touch {
+		get {
+			return _touchSensor;
+		}
+	}
+	
 	public int GetSensorValue(int id) {
 		if (0 <= id && id < 8) {
 //			Debug.Log ("[RobotManager:GetSensorValue] id: " + id + ", value: " + _motorAngle [id]);
@@ -33,45 +46,18 @@ public class RobotManager : MonoBehaviour {
 	int count;
 	IEnumerator UpdateSensor () {
 		while (true) {
-//			string strSensor = "";
-//			foreach (int angle in _motorAngle) {
-//				strSensor += angle.ToString () + " ";
-//			}
-//			Debug.Log ("CurrentSensor4 " + strSensor);
-			Process ();
-			yield return new WaitForSeconds(0.1f);
-		}
-		yield return null;
-	}
-	
-	void Update () {
-//		string strSensor = "";
-//		foreach (int angle in _motorAngle) {
-//			strSensor += angle.ToString () + " ";
-//		}
-//		Debug.Log ("CurrentSensor2 " + strSensor);
-#if UNITY_ANDROID
-#if UNITY_EDITOR
-		return;
-#endif
-#endif
-	}
-
-	void Process () {
-		if (!CommunicationManager.Instance.IsConnected ())
-			return;
-		// update sensor value
-		byte[] buff = CommunicationManager.Instance.Read ();
-//		Debug.Log ("[RobotManager:Update] Read " + buff.Length.ToString ());
-		if (buff != null) {
-			foreach (byte data in buff)
-				_parser.PushByte (data);
-		}
-//		Debug.Log ("[RobotManager:Update] Message has " + _parser.Count.ToString ());
-		while (_parser.Count > 0) {
-			sProtocol protocol = _parser.Dequeue ();
-//			Debug.Log ("[RobotManager:Update] Get sensor angle" + protocol.cmd.ToString () + " id " + protocol.id.ToString () + " value " + protocol.value.ToString ());
-			switch (protocol.cmd) {
+			// update sensor value
+			byte[] buff = CommunicationManager.Instance.Read ();
+//			Debug.Log ("[RobotManager:Update] Read " + buff.Length.ToString ());
+			if (buff != null) {
+				foreach (byte data in buff)
+					_parser.PushByte (data);
+			}
+//			Debug.Log ("[RobotManager:Update] Message has " + _parser.Count.ToString ());
+			while (_parser.Count > 0) {
+				sProtocol protocol = _parser.Dequeue ();
+//				Debug.Log ("[RobotManager:Update] Get sensor angle" + protocol.cmd.ToString () + " id " + protocol.id.ToString () + " value " + protocol.value.ToString ());
+				switch (protocol.cmd) {
 				case UcrParser.MS_SENSOR_ANGLE:
 				{
 					if (protocol.id == 1)
@@ -93,40 +79,34 @@ public class RobotManager : MonoBehaviour {
 //					Debug.Log ("[RobotManager:Update] Get sensor angle id " + protocol.id + " value " + protocol.value);
 					break;
 				}
+				case UcrParser.MS_SENSOR_TOUCH:
+				{
+					if (protocol.id == 1)
+						_touchSensor[0] = protocol.value;
+					break;
+				}
+				}
 			}
+			yield return new WaitForSeconds(0.05f);
 		}
-//		string strSensor = "";
-//		foreach (int angle in _motorAngle) {
-//			strSensor += angle.ToString () + " ";
-//		}
-//		Debug.Log ("CurrentSensor " + strSensor);
+		yield return null;
 	}
 
-	DateTime lastMove;
 	[RPC]
-	public void Move (float linear, float angular) {
-		Debug.Log ("[RobotManager:Move] : (" + linear.ToString () + ", " + angular.ToString () + ")"); 
+	public void Mobility (float linear, float angular) {
+		Debug.Log ("[RobotManager:Mobility] : (" + linear.ToString () + ", " + angular.ToString () + ")"); 
 		float velocityLeft = angular + linear;
 		float velocityRight = angular - linear;
 		CommunicationManager.Instance.Write (UcrParser.GetBuffDcSpeed (51, (int)(velocityLeft*100)));
 		CommunicationManager.Instance.Write (UcrParser.GetBuffDcSpeed (52, (int)(velocityRight*100)));
-		Debug.Log ("[RobotManager:Move] : (" + linear + ", " + angular + ") => (" + velocityLeft + ", " + velocityRight + ")");
-		//		CancelInvoke ("StopMobility");
-//		Invoke ("StopMobility", 1f);
-//		lastMove = DateTime.Now;
+		Debug.Log ("[RobotManager:Mobility] : (" + linear + ", " + angular + ") => (" + velocityLeft + ", " + velocityRight + ")");
 	}
 
 	void StopMobility () {
-		if (DateTime.Now.Subtract(lastMove).TotalMilliseconds > 1000) {
-			Debug.Log ("Automatically Stop");
-			Move (0, 0);
-		}
+		Debug.Log ("StopMobility");
+		Mobility (0, 0);
 	}
 	
-	public void JoystickMove (Vector2 joystick) {
-		Move (joystick.y*0.7f, joystick.x*0.5f);
-	}
-
 	[RPC]
 	public void PanTilt (float pan, float tilt) {
 		Debug.Log ("[RobotManager:PanTilt] : (" + pan.ToString () + ", " + tilt.ToString () + ")"); 

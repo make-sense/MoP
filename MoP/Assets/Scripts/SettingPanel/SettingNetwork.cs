@@ -6,6 +6,7 @@ using System.Net.Sockets;
 
 public class SettingNetwork : MonoBehaviour {
 
+	public Image state;
 	public Text mode;
 	public Text textOpenConnect;
 	public Text ipBase;
@@ -15,16 +16,40 @@ public class SettingNetwork : MonoBehaviour {
 	void Start () {
 		ModeDisplay ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	void OnEnable () {
+		StartCoroutine ("CheckState");
+	}
+
+	void OnDisable () {
+		_run = false;
+	}
+
+	bool _run;
+	IEnumerator CheckState () {
+		_run = true;
+		while (_run) {
+			if (ConfigManager.NetworkMode == 0) {
+				if (NetworkManager.Opened)
+					state.color = MS_Color.blue;
+				else
+					state.color = MS_Color.white;
+			}
+			else {
+				if (NetworkManager.Connected)
+					state.color = MS_Color.blue;
+				else
+					state.color = MS_Color.white;
+			}
+			yield return new WaitForSeconds(0.5f);
+		}
+		yield return null;
 	}
 
 	public void OpenConnect () {
 		if (ConfigManager.NetworkMode == 0) {
 			// Server Mode
-			NetworkServer.Open ();
+			NetworkManager.Open ();
 		} else {
 			// Client Mode
 			if (ipTarget.text.Length > 0)

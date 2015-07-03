@@ -38,4 +38,5 @@ MonoBehaviour:
   - GetAngle
   - SetAngle
   - PanTilt
+  - Mobility
   DisableAutoOpenWizard: 0

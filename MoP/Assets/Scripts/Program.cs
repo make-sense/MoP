@@ -14,7 +14,6 @@ public class Program : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Debug.Log ("[Program:Start]");
-//		Invoke ("GetBTDevices", 5f);
 	}
 	
 	// Update is called once per frame
@@ -26,30 +25,32 @@ public class Program : MonoBehaviour {
 	}
 
 	public void Stop () {
-		RobotManager.Instance.Move (0, 0);
+		RobotManager.Instance.Mobility (0, 0);
 	}
 	
 	public void Forward () {
-		RobotManager.Instance.Move (linearVelocity, 0);
+		RobotManager.Instance.Mobility (linearVelocity, 0);
 	}
 	
 	public void Backward () {
-		RobotManager.Instance.Move (-linearVelocity, 0);
+		RobotManager.Instance.Mobility (-linearVelocity, 0);
 	}
 	
 	public void RightTurn () {
-		RobotManager.Instance.Move (0, angularVelocity);
+		RobotManager.Instance.Mobility (0, angularVelocity);
 	}
 	
 	public void LeftTurn () {
-		RobotManager.Instance.Move (0, -angularVelocity);
+		RobotManager.Instance.Mobility (0, -angularVelocity);
 	}
 
 	public void Shoot () {
-		RobotManager.Instance.Move (1f, 0);
+		RobotManager.Instance.Mobility (1f, 0);
 	}
 
-	public void ChangeToControlMode () {
-		Application.LoadLevel ("MoP_Controller");
+	public void JoystickMovility (Vector2 joystick) {
+		RobotManager.Instance.Mobility (joystick.y*0.7f, joystick.x*0.5f);
 	}
+	
+
 }

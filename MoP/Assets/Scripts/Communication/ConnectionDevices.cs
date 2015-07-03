@@ -13,9 +13,6 @@ public class ConnectionDevices : MonoBehaviour {
 
 	public Image state;
 
-	static Color orange = new Color (245f / 255f, 166f / 255f, 35f / 255f);
-	static Color red = new Color (255f / 255f, 0f, 0f);
-	static Color blue = new Color (38f / 255f, 156f / 255f, 255f / 255f);
 	const int HEIGHT_STEP = 70;
 
 	void Start () {
@@ -26,12 +23,12 @@ public class ConnectionDevices : MonoBehaviour {
 	IEnumerator CheckConnection () {
 		while (true) {
 			if (CommunicationManager.Instance.IsConnected ())
-				state.color = blue;
+				state.color = MS_Color.blue;
 			else {
 				//				if (AndroidManager.Instance.BluetoothConnectingState == 2)
 				//					btImage.sprite = BTConnecting;
 				//				else if (AndroidManager.Instance.BluetoothConnectingState == 1)
-				state.color = red;
+				state.color = MS_Color.white;
 			}
 			yield return new WaitForSeconds(1f);
 		}
