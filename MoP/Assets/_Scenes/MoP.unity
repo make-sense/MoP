@@ -311,7 +311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &126638289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,6 +485,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1eccd7f27eb84047afeca0112d6cc22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &383066168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 383066169}
+  - 114: {fileID: 383066170}
+  m_Layer: 0
+  m_Name: NetworkServer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &383066169
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 383066168}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 612192797}
+  m_RootOrder: 6
+--- !u!114 &383066170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 383066168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f751523d83b74fd1a3c1ecd53300864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &406982713
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,6 +644,7 @@ Transform:
   - {fileID: 126638290}
   - {fileID: 1984379425}
   - {fileID: 361656566}
+  - {fileID: 383066169}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!1 &616559840
@@ -1208,7 +1248,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1155099259}
   - 114: {fileID: 1155099260}
-  - 114: {fileID: 1155099261}
+  - 148: {fileID: 1155099261}
   m_Layer: 0
   m_Name: RobotManager
   m_TagString: Untagged
@@ -1239,31 +1279,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52428a7d0b0504b40acfc39a4f9f3e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1155099261
-MonoBehaviour:
+--- !u!148 &1155099261
+NetworkView:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1155099258}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 0}
-  synchronization: 0
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  ownershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  ObservedComponentsFoldoutOpen: 1
-  viewIdField: 1
-  instantiationId: 1
-  isRuntimeInstantiated: 0
+  m_StateSynchronization: 0
+  m_Observed: {fileID: 1155099259}
+  m_ViewID:
+    m_ID: 1
+    m_Type: 1
 --- !u!1 &1193722474
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,6 +2036,10 @@ Prefab:
     - target: {fileID: 11464692, guid: bce15df89f5bd4899aab8a9b47d7dffe, type: 2}
       propertyPath: m_Value
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 166654, guid: bce15df89f5bd4899aab8a9b47d7dffe, type: 2}
+      propertyPath: m_Name
+      value: SwitchJoystick
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bce15df89f5bd4899aab8a9b47d7dffe, type: 2}
