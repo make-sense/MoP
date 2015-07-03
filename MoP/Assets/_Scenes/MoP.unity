@@ -440,7 +440,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1595400472}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -6.10351562e-05, y: 200}
@@ -1018,9 +1018,9 @@ RectTransform:
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 100, y: -50}
+  m_AnchoredPosition: {x: 100, y: 30}
   m_SizeDelta: {x: 380, y: 160}
-  m_Pivot: {x: .5, y: .5}
+  m_Pivot: {x: .5, y: .99999994}
 --- !u!114 &467588194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2101,7 +2101,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1595400472}
-  m_RootOrder: 8
+  m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -.000122070312, y: -20}
@@ -2162,7 +2162,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1595400472}
-  m_RootOrder: 2
+  m_RootOrder: 8
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 280}
@@ -2903,13 +2903,13 @@ RectTransform:
   m_Children:
   - {fileID: 1455574108}
   - {fileID: 221763688}
-  - {fileID: 871349317}
-  - {fileID: 1619653043}
-  - {fileID: 196329302}
-  - {fileID: 1226522459}
-  - {fileID: 1617149408}
-  - {fileID: 2092770811}
   - {fileID: 844275764}
+  - {fileID: 2092770811}
+  - {fileID: 1617149408}
+  - {fileID: 1226522459}
+  - {fileID: 196329302}
+  - {fileID: 1619653043}
+  - {fileID: 871349317}
   m_Father: {fileID: 764387091}
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
@@ -2972,7 +2972,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1595400472}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -.000152587891, y: 120}
@@ -3036,7 +3036,7 @@ Transform:
   - {fileID: 470471468}
   - {fileID: 467588193}
   m_Father: {fileID: 1595400472}
-  m_RootOrder: 3
+  m_RootOrder: 7
 --- !u!114 &1619653044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4315,6 +4315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0796b9c1b57e42319c50df1923a74ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BluetoothConnectingState: 0
 --- !u!4 &2030137059
 Transform:
   m_ObjectHideFlags: 0
@@ -4614,7 +4615,7 @@ Transform:
   - {fileID: 1878862680}
   - {fileID: 1091609392}
   m_Father: {fileID: 1595400472}
-  m_RootOrder: 7
+  m_RootOrder: 3
 --- !u!114 &2092770812
 MonoBehaviour:
   m_ObjectHideFlags: 0
