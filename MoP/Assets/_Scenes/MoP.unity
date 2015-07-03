@@ -1283,6 +1283,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 616559841}
   - 114: {fileID: 616559842}
+  - 148: {fileID: 616559843}
   m_Layer: 0
   m_Name: '@Program'
   m_TagString: Untagged
@@ -1317,6 +1318,18 @@ MonoBehaviour:
   animClip: {fileID: 0}
   linearVelocity: .699999988
   angularVelocity: .5
+--- !u!148 &616559843
+NetworkView:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 616559840}
+  m_Enabled: 1
+  m_StateSynchronization: 0
+  m_Observed: {fileID: 616559841}
+  m_ViewID:
+    m_ID: 1
+    m_Type: 1
 --- !u!224 &644936808 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22479134, guid: bce15df89f5bd4899aab8a9b47d7dffe,
@@ -2314,7 +2327,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1155099259}
   - 114: {fileID: 1155099260}
-  - 148: {fileID: 1155099261}
   - 114: {fileID: 1155099262}
   m_Layer: 0
   m_Name: RobotManager
@@ -2346,18 +2358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52428a7d0b0504b40acfc39a4f9f3e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!148 &1155099261
-NetworkView:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1155099258}
-  m_Enabled: 1
-  m_StateSynchronization: 0
-  m_Observed: {fileID: 1155099259}
-  m_ViewID:
-    m_ID: 1
-    m_Type: 1
 --- !u!114 &1155099262
 MonoBehaviour:
   m_ObjectHideFlags: 0
