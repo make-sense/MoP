@@ -25,7 +25,7 @@ public class CommunicationManager : MonoBehaviour {
 	}
 
 	void Start () {
-//		Invoke ("AutoConnect", 1f);
+		Invoke ("AutoConnect", 1f);
 	}
 
 	void OnDestroy () {
