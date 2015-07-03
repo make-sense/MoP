@@ -65,8 +65,10 @@ public class ConnectionDevices : MonoBehaviour {
 					break;
 			}
 			Debug.Log ("[BTDeviceManager:ShowDevice] Found device: " + devices.Length);
-			if (devices.Length > 0)
-				GetComponentInChildren <ScrollRect> ().content.sizeDelta = new Vector2 (380, devices.Length*60+40);
+			if (devices.Length > 0) {
+//				GetComponentInChildren <ScrollRect> ().content.sizeDelta = new Vector2 (380, devices.Length*HEIGHT_STEP+20);
+				GetComponentInChildren <RectTransform> ().sizeDelta = new Vector2 (380, devices.Length*HEIGHT_STEP+20);
+			}
 
 			foreach (string device in devices) {
 				Transform t = Instantiate (devicePrefab) as Transform;
