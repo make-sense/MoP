@@ -36,12 +36,19 @@ public class Program : MonoBehaviour {
 	}
 	
 	void SyncArmMotor () {
-		for (int i = 2; i < 8; i++) 
-		{
-			int angle = RobotManager.Instance.Angle [i];
-			nv.RPC ("SetAngle", RPCMode.Others, RobotManager.Instance.MotorIndexToID[i], angle);
-		}
-	}
+//		for (int i = 2; i < 8; i++) 
+//		{
+//			int angle = RobotManager.Instance.Angle [i];
+//			nv.RPC ("SetAngle", RPCMode.Others, RobotManager.Instance.MotorIndexToID[i], angle);
+//		}
+		nv.RPC ("PostureArm", RPCMode.Others, 
+		        RobotManager.Instance._motorAngle[2],
+		        RobotManager.Instance._motorAngle[3],
+		        RobotManager.Instance._motorAngle[4],
+		        RobotManager.Instance._motorAngle[5],
+		        RobotManager.Instance._motorAngle[6],
+		        RobotManager.Instance._motorAngle[7]);
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -100,6 +107,16 @@ public class Program : MonoBehaviour {
 	public void PanTilt (float pan, float tilt) {
 		RobotManager.Instance.PanTilt(pan, tilt);
 	}
+
+	[RPC}
+	 public void PostureArm (int mot11, int mot12, int mot13, int mot21, int mot22, int mot23) {
+		RobotManager.Instance.SetAngle (11, mot11);
+		RobotManager.Instance.SetAngle (12, mot12);
+		RobotManager.Instance.SetAngle (13, mot13);
+		RobotManager.Instance.SetAngle (21, mot21);
+		RobotManager.Instance.SetAngle (22, mot22);
+		RobotManager.Instance.SetAngle (23, mot23);
+	 }
 
 	[RPC]
 	public void SetAngle (int id, int degree) {

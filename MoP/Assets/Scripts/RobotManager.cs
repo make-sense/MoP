@@ -6,8 +6,8 @@ using System.Collections.Generic;
 public class RobotManager : MonoBehaviour {
 
 	UcrParser _parser = new UcrParser ();
-	int[] _motorAngle = {150, 150, 150, 150, 150, 150, 150, 150};
-	int[] _touchSensor = {0};
+	public int[] _motorAngle = {150, 150, 150, 150, 150, 150, 150, 150};
+	public int[] _touchSensor = {0};
 
 	public int[] MotorIndexToID = {1, 2, 11, 12, 13, 21, 22, 23};
 	public int[] MotorIDToIndex = {-1,  0,  1, -1, -1, -1, -1, -1, -1, -1,
