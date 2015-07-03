@@ -636,6 +636,45 @@ RectTransform:
   m_PrefabParentObject: {fileID: 22405814, guid: 9aedef6dab73a4abb92a658fa3a21d7a,
     type: 2}
   m_PrefabInternal: {fileID: 491519976}
+--- !u!1 &593855131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 593855132}
+  - 114: {fileID: 593855133}
+  m_Layer: 0
+  m_Name: NetworkClient
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &593855132
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 593855131}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 812090650}
+  m_RootOrder: 5
+--- !u!114 &593855133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 593855131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5844a34774ff64cc7bab2e898862d627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &702972427
 Prefab:
   m_ObjectHideFlags: 0
@@ -897,6 +936,7 @@ Transform:
   - {fileID: 832713719}
   - {fileID: 881010246}
   - {fileID: 1830491760}
+  - {fileID: 593855132}
   m_Father: {fileID: 0}
   m_RootOrder: 4
 --- !u!1 &832713717
@@ -1340,6 +1380,7 @@ GameObject:
   - 4: {fileID: 1021477134}
   - 114: {fileID: 1021477133}
   - 114: {fileID: 1021477132}
+  - 148: {fileID: 1021477135}
   m_Layer: 0
   m_Name: '@ProgramController'
   m_TagString: Untagged
@@ -1404,6 +1445,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!148 &1021477135
+NetworkView:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1021477131}
+  m_Enabled: 1
+  m_StateSynchronization: 0
+  m_Observed: {fileID: 1021477134}
+  m_ViewID:
+    m_ID: 1
+    m_Type: 1
 --- !u!1 &1031195199
 GameObject:
   m_ObjectHideFlags: 0
@@ -2187,7 +2240,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1830491759
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using System.Collections;
 public class ProgramController : MonoBehaviour {
 
 	PhotonView pv;
+	NetworkView nv;
 
 	public Text Mot1;
 	public Text Mot2;
@@ -22,6 +23,7 @@ public class ProgramController : MonoBehaviour {
 
 	void Awake () {
 		pv = GetComponent<PhotonView> ();
+		nv = GetComponent<NetworkView> ();
 	}
 	
 	// Use this for initialization
@@ -29,11 +31,6 @@ public class ProgramController : MonoBehaviour {
 		StartCoroutine ("SyncMotion");
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	bool enableSync;
 	IEnumerator SyncMotion () {
 		enableSync = true;
@@ -53,7 +50,7 @@ public class ProgramController : MonoBehaviour {
 		for (int i = 2; i < 8; i++) 
 		{
 			int angle = MotionSensorManager.Instance.Angle [i];
-			pv.RPC ("SetAngle", PhotonTargets.Others, MotionSensorManager.MotorIndexToID[i], angle);
+			nv.RPC ("SetAngle", RPCMode.Others, MotionSensorManager.MotorIndexToID[i], angle);
 		}
 	}
 
@@ -87,32 +84,33 @@ public class ProgramController : MonoBehaviour {
 
 	public void JoystickMove (Vector2 joystick) {
 		Debug.Log ("[ProgramController:JoystickMove] " + joystick.ToString ());
+//		nv.RPC ("Move", RPCMode.Others, joystick.y, joystick.x);
 		pv.RPC ("Move", PhotonTargets.Others, joystick.y, joystick.x);
 	}
 
 	public void JoystickPanTilt (Vector2 joystick) {
 		Debug.Log ("[ProgramController:JoystickPanTilt] " + joystick.ToString ());
-		pv.RPC ("PanTilt", PhotonTargets.Others, -joystick.x, -joystick.y);
+		nv.RPC ("PanTilt", RPCMode.Others, -joystick.x, -joystick.y);
 	}
 
 	public void ArrowUp () {
 		Debug.Log ("[ProgramController:ArrowUp] 0.7f, 0ff");
-		pv.RPC ("Move", PhotonTargets.Others, 0.7f, 0f);
+		nv.RPC ("Move", RPCMode.Others, 0.7f, 0f);
 	}
 	
 	public void ArrowDown () {
 		Debug.Log ("[ProgramController:ArrowDown] 0f, 0.9f");
-		pv.RPC ("Move", PhotonTargets.Others, 0f, 0f);
+		nv.RPC ("Move", RPCMode.Others, 0f, 0f);
 	}
 	
 	public void ArrowLeft () {
 		Debug.Log ("[ProgramController:ArrowLeft] 0f, -0.9f");
-		pv.RPC ("Move", PhotonTargets.Others, 0f, -0.9f);
+		nv.RPC ("Move", RPCMode.Others, 0f, -0.9f);
 	}
 	
 	public void ArrowRight () {
 		Debug.Log ("[ProgramController:ArrowRight] 0f, 0.9f");
-		pv.RPC ("Move", PhotonTargets.Others, 0f, 0.9f);
+		nv.RPC ("Move", RPCMode.Others, 0f, 0.9f);
 	}
 
 	public void SetAngle () {
