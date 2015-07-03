@@ -3769,8 +3769,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementRange: 100
-  Target: {fileID: 1155099258}
-  Action: JoystickPanTilt
+  Target: {fileID: 616559840}
+  Action: PanTilt
   SetZeroWhenRelease: 0
 --- !u!114 &1982392151
 MonoBehaviour:

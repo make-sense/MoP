@@ -28,6 +28,10 @@ public class CommunicationManager : MonoBehaviour {
 //		Invoke ("AutoConnect", 1f);
 	}
 
+	void OnDestroy () {
+		Disconnect ();
+	}
+
 	void AutoConnect () {
 		Debug.Log ("SelectedDevice: " + ConfigManager.SelectedDevice);
 		if (ConfigManager.SelectedDevice.Length > 0) 

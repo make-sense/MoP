@@ -106,7 +106,6 @@ public class RobotManager : MonoBehaviour {
 		Mobility (0, 0);
 	}
 	
-	[RPC]
 	public void PanTilt (float pan, float tilt) {
 		Debug.Log ("[RobotManager:PanTilt] : (" + pan.ToString () + ", " + tilt.ToString () + ")"); 
 		CommunicationManager.Instance.Write (UcrParser.GetBuffMotorAngle (1, (int)(pan*90)+150));
@@ -117,7 +116,6 @@ public class RobotManager : MonoBehaviour {
 		PanTilt (-pantilt.x, -pantilt.y);
 	}
 
-	[RPC]
 	public void SetAngle (int id, int degree) {
 		Debug.Log ("[RobotManager:SetAngle] : (" + id + ", " + degree + ")");
 		if (MotorIDToIndex [id] != -1) {

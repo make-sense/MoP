@@ -17,8 +17,32 @@ public class Program : MonoBehaviour {
 	void Start () {
 		Debug.Log ("[Program:Start]");
 		nv = GetComponentInChildren<NetworkView> ();
+		StartCoroutine ("SyncMotion");
+	}
+
+	bool enableSync;
+	IEnumerator SyncMotion () {
+		enableSync = true;
+		while (enableSync) {
+			if (RobotManager.Instance.Touch[0] > 0)
+				SyncArmMotor ();
+			
+			DisplayMotorAngle ();
+			DisplayTouch ();
+			
+			yield return new WaitForSeconds (0.1f);
+		}
+		yield return null;
 	}
 	
+	void SyncArmMotor () {
+		for (int i = 2; i < 8; i++) 
+		{
+			int angle = RobotManager.Instance.Angle [i];
+			nv.RPC ("SetAngle", RPCMode.Others, RobotManager.MotorIndexToID[i], angle);
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Escape)) 
@@ -58,8 +82,32 @@ public class Program : MonoBehaviour {
 			nv.RPC ("Mobility", RPCMode.Others, joystick.y*0.7f, joystick.x*0f);
 	}
 
+	public void JoystickPanTilt (Vector2 pantilt) {
+		if (ConfigManager.NetworkMode == 0)
+			RobotManager.Instance.PanTilt (-pantilt.x, -pantilt.y);
+		else
+			nv.RPC ("PanTilt", RPCMode.Others, -pantilt.x, -pantilt.y);
+	}
+	
+
+
 	[RPC]
 	public void Mobility (float linear, float angular) {
 		RobotManager.Instance.Mobility (linear, angular);
+	}
+
+	[RPC]
+	public void PanTilt (float pan, float tilt) {
+		RobotManager.Instance.PanTilt(pan, tilt);
+	}
+
+	[RPC]
+	public void SetAngle (int id, int degree) {
+		RobotManager.Instance.SetAngle (id, degree);
+	}
+
+	[RPC]
+	public int GetAngle (int id) {
+		return RobotManager.Instance.GetAngle (id);
 	}
 }
