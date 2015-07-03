@@ -92,7 +92,6 @@ public class RobotManager : MonoBehaviour {
 		yield return null;
 	}
 
-	[RPC]
 	public void Mobility (float linear, float angular) {
 		Debug.Log ("[RobotManager:Mobility] : (" + linear.ToString () + ", " + angular.ToString () + ")"); 
 		float velocityLeft = angular + linear;

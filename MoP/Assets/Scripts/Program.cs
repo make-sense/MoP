@@ -11,6 +11,8 @@ public class Program : MonoBehaviour {
 	public float linearVelocity = 0.7f;
 	public float angularVelocity = 0.5f;
 
+	NetworkView nv;
+
 	// Use this for initialization
 	void Start () {
 		Debug.Log ("[Program:Start]");
@@ -25,32 +27,38 @@ public class Program : MonoBehaviour {
 	}
 
 	public void Stop () {
-		RobotManager.Instance.Mobility (0, 0);
+		Mobility (0, 0);
 	}
 	
 	public void Forward () {
-		RobotManager.Instance.Mobility (linearVelocity, 0);
+		Mobility (linearVelocity, 0);
 	}
 	
 	public void Backward () {
-		RobotManager.Instance.Mobility (-linearVelocity, 0);
+		Mobility (-linearVelocity, 0);
 	}
 	
 	public void RightTurn () {
-		RobotManager.Instance.Mobility (0, angularVelocity);
+		Mobility (0, angularVelocity);
 	}
 	
 	public void LeftTurn () {
-		RobotManager.Instance.Mobility (0, -angularVelocity);
+		Mobility (0, -angularVelocity);
 	}
 
 	public void Shoot () {
-		RobotManager.Instance.Mobility (1f, 0);
+		Mobility (1f, 0);
 	}
 
 	public void JoystickMovility (Vector2 joystick) {
-		RobotManager.Instance.Mobility (joystick.y*0.7f, joystick.x*0.5f);
+		if (ConfigManager.NetworkMode == 0)
+			RobotManager.Instance.Mobility (joystick.y*0.7f, joystick.x*0.5f);
+		else
+			nv.RPC ("Mobility", RPCMode.Others, joystick.y*0.7f, joystick.x*0f);
 	}
-	
 
+	[RPC]
+	public void Mobility (float linear, float angular) {
+		RobotManager.Instance.Mobility (linear, angular);
+	}
 }
