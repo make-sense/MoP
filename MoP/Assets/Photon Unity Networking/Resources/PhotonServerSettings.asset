@@ -39,4 +39,5 @@ MonoBehaviour:
   - SetAngle
   - PanTilt
   - Mobility
+  - PostureArm
   DisableAutoOpenWizard: 0

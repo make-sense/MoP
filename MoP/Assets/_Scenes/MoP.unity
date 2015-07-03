@@ -2358,6 +2358,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52428a7d0b0504b40acfc39a4f9f3e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _motorAngle: 9600000096000000960000009600000096000000960000009600000096000000
+  _touchSensor: 00000000
   MotorIndexToID: 01000000020000000b0000000c0000000d000000150000001600000017000000
   MotorIDToIndex: ffffffff0000000001000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff020000000300000004000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff050000000600000007000000ffffffffffffffffffffffffffffffffffffffffffffffff
 --- !u!114 &1155099262
