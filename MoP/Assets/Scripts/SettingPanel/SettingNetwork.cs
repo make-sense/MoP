@@ -55,6 +55,7 @@ public class SettingNetwork : MonoBehaviour {
 			if (ipTarget.text.Length > 0)
 				ipBase.text = ipTarget.text;
 			ConfigManager.IpAddr = ipBase.text;
+			NetworkManager.Connect (ConfigManager.IpAddr);
 		}
 	}
 

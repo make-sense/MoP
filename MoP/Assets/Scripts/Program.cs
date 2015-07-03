@@ -16,6 +16,7 @@ public class Program : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Debug.Log ("[Program:Start]");
+		nv = GetComponentInChildren<NetworkView> ();
 	}
 	
 	// Update is called once per frame
