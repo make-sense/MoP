@@ -12,12 +12,12 @@ public class JoystickManager : MonoBehaviour {
 	public Slider slider;
 
 	void Start () {
-		slider.value = SettingManager.Instance.JoystickType;
+		slider.value = ConfigManager.JoystickType;
 	}
 
 	public void ToggleJoystick () {
-		SettingManager.Instance.JoystickType = (int)slider.value;
-		SetJoystick (SettingManager.Instance.JoystickType);
+		ConfigManager.JoystickType = (int)slider.value;
+		SetJoystick (ConfigManager.JoystickType);
 	}
 
 	public void SetJoystick (int joystickMode) {

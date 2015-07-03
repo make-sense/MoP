@@ -29,10 +29,10 @@ public class CommunicationManager : MonoBehaviour {
 	}
 
 	void AutoConnect () {
-		Debug.Log ("SelectedDevice: " + SettingManager.Instance.SelectedDevice);
-		if (SettingManager.Instance.SelectedDevice.Length > 0) 
+		Debug.Log ("SelectedDevice: " + ConfigManager.SelectedDevice);
+		if (ConfigManager.SelectedDevice.Length > 0) 
 		{
-			Connect (SettingManager.Instance.SelectedDevice);
+			Connect (ConfigManager.SelectedDevice);
 		}
 	}
 
