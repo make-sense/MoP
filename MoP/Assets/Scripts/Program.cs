@@ -27,8 +27,8 @@ public class Program : MonoBehaviour {
 			if (RobotManager.Instance.Touch[0] > 0)
 				SyncArmMotor ();
 			
-			DisplayMotorAngle ();
-			DisplayTouch ();
+//			DisplayMotorAngle ();
+//			DisplayTouch ();
 			
 			yield return new WaitForSeconds (0.1f);
 		}
@@ -39,7 +39,7 @@ public class Program : MonoBehaviour {
 		for (int i = 2; i < 8; i++) 
 		{
 			int angle = RobotManager.Instance.Angle [i];
-			nv.RPC ("SetAngle", RPCMode.Others, RobotManager.MotorIndexToID[i], angle);
+			nv.RPC ("SetAngle", RPCMode.Others, RobotManager.Instance.MotorIndexToID[i], angle);
 		}
 	}
 
