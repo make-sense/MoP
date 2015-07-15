@@ -3,6 +3,8 @@ Robot MoP
 ===
 Website: makesense.cc
 
-Download link: https://github.com/make-sense/MoP/archive/master.zip
+Download APK(Android) Link: https://github.com/make-sense/MoP/raw/master/MoP.apk
+
+Download Source link: https://github.com/make-sense/MoP/archive/master.zip
 
 ![alt text](Photo/HelloMop.png "Skin")
