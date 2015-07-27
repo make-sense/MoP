@@ -42,7 +42,7 @@ public class CommunicationManager : MonoBehaviour {
 
 	public bool Connect (string device)
 	{
-		Debug.Log ("[CommunicationManager:Connect] Connect to device");
+		Debug.Log ("[CommunicationManager:Connect] Connect to device " + device);
 		if (IsConnected ())
 			Disconnect ();
 		return _comm.Connect (device);

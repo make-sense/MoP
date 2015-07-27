@@ -202,7 +202,10 @@ public class AndroidManager : MonoBehaviour {
 	
 	private void _ConnectBluetooth(string deviceName)
 	{
+#if UNITY_EDITOR
+#else
 		_activity.Call("ConnectDevice", deviceName);
+#endif
 	}
 	
 	private void _DisconnectBluetooth()

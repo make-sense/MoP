@@ -9,6 +9,7 @@ public class BTDeviceButton : MonoBehaviour {
 		Text label = GetComponentInChildren<Text> ();
 		CommunicationManager.Instance.Connect (label.text);
 		ConfigManager.SelectedDevice = label.text;
+		GameObject.Find ("ConnectedDeviceName").GetComponentInChildren<Text> ().text = label.text;
 		GameObject.Find ("PanelDevice").SetActive (false);
 	}
 }
