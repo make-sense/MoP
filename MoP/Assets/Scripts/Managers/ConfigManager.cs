@@ -7,6 +7,8 @@ public class ConfigManager : MonoBehaviour {
 	static string Key_SelectedDevice = "Key_SelectedDevice";
 	static string Key_NetworkMode = "Key_NetworkMode";
 	static string Key_IPAddr = "Key_IPAddr";
+	static string Key_VelocityLinear = "Key_VelocityLinear";
+	static string Key_VelocityAngular = "Key_VelocityAngular";
 
 	public static int JoystickType {
 		get {
@@ -51,4 +53,36 @@ public class ConfigManager : MonoBehaviour {
 			PlayerPrefs.SetString (Key_IPAddr, value);
 		}
 	}
+
+	public static int VelocityLinear {
+		get {
+			if (!PlayerPrefs.HasKey (Key_VelocityLinear))
+				PlayerPrefs.SetInt (Key_VelocityLinear, 80);
+			return PlayerPrefs.GetInt (Key_VelocityLinear);
+		}
+		set {
+			if (value > 100)
+				value = 100;
+			else if (value < -100)
+				value = -100;
+			PlayerPrefs.SetInt (Key_VelocityLinear, value);
+		}
+	}
+	
+	public static int VelocityAngular {
+		get {
+			if (!PlayerPrefs.HasKey (Key_VelocityAngular))
+				PlayerPrefs.SetInt (Key_VelocityAngular, 70);
+			return PlayerPrefs.GetInt (Key_VelocityAngular);
+		}
+		set {
+			if (value > 100)
+				value = 100;
+			else if (value < -100)
+				value = -100;
+			PlayerPrefs.SetInt (Key_VelocityAngular, value);
+		}
+	}
+	
+
 }

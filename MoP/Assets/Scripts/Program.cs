@@ -8,9 +8,6 @@ public class Program : MonoBehaviour {
 	public Animation anim;
 	public AnimationClip animClip;
 
-	public float linearVelocity = 0.7f;
-	public float angularVelocity = 0.5f;
-
 	NetworkView nv;
 
 	// Use this for initialization
@@ -57,19 +54,19 @@ public class Program : MonoBehaviour {
 	}
 	
 	public void Forward () {
-		Mobility (linearVelocity, 0);
+		Mobility ((float)ConfigManager.VelocityLinear*0.01f, 0);
 	}
 	
 	public void Backward () {
-		Mobility (-linearVelocity, 0);
+		Mobility (-(float)ConfigManager.VelocityLinear*0.01f, 0);
 	}
 	
 	public void RightTurn () {
-		Mobility (0, angularVelocity);
+		Mobility (0, (float)ConfigManager.VelocityAngular*0.01f);
 	}
 	
 	public void LeftTurn () {
-		Mobility (0, -angularVelocity);
+		Mobility (0, -(float)ConfigManager.VelocityAngular*0.01f);
 	}
 
 	public void Shoot () {
