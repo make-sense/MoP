@@ -70,7 +70,7 @@ public class SerialCommunication : CommunicationBase {
 			result = serialPort.Read (bytes, 0, len);
 		}
 		catch (Exception e) {
-			Debug.Log (e.ToString ());
+//			Debug.Log (e.ToString ());
 		}
 		return result;
 		#else

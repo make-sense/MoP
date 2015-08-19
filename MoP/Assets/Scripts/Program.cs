@@ -88,11 +88,11 @@ public class Program : MonoBehaviour {
 	}
 	
 	public void LeftArm (int degree) {
-		RobotManager.Instance.SetAngle (1, degree);
+		RobotManager.Instance.WriteAngle (1, degree);
 	}
 	
 	public void RightArm (int degree) {
-		RobotManager.Instance.SetAngle (2, degree);
+		RobotManager.Instance.WriteAngle (2, degree);
 	}
 	
 	[RPC]

@@ -127,6 +127,11 @@ public class RobotManager : MonoBehaviour {
 		}
 	}
 
+	public void WriteAngle (int id, int degree) {
+		Debug.Log ("[RobotManager:WriteAngle] : (" + id + ", " + degree + ")");
+		CommunicationManager.Instance.Write (UcrParser.GetBuffMotorAngle (id, degree));
+	}
+
 	[RPC]
 	public int GetAngle (int id) {
 		Debug.Log ("[RobotManager:GetAngle] : (" + id + ")");
