@@ -63,7 +63,8 @@ public class CommunicationManager : MonoBehaviour {
 	}
 
 	public void Write(byte[] buff) {
-		_comm.Write (buff, buff.Length);
+		if (IsConnected())
+			_comm.Write (buff, buff.Length);
 	}
 
 	public byte[] Read () {

@@ -87,8 +87,14 @@ public class Program : MonoBehaviour {
 			nv.RPC ("PanTilt", RPCMode.Others, -pantilt.x, -pantilt.y);
 	}
 	
-
-
+	public void LeftArm (int degree) {
+		RobotManager.Instance.SetAngle (1, degree);
+	}
+	
+	public void RightArm (int degree) {
+		RobotManager.Instance.SetAngle (2, degree);
+	}
+	
 	[RPC]
 	public void Mobility (float linear, float angular) {
 		RobotManager.Instance.Mobility (linear, angular);
