@@ -2353,6 +2353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0796b9c1b57e42319c50df1923a74ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BluetoothConnectingState: 0
 --- !u!4 &2030137059
 Transform:
   m_ObjectHideFlags: 0
