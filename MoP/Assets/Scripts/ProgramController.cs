@@ -4,7 +4,6 @@ using System.Collections;
 
 public class ProgramController : MonoBehaviour {
 
-	PhotonView pv;
 	NetworkView nv;
 
 	public Text Mot1;
@@ -22,7 +21,6 @@ public class ProgramController : MonoBehaviour {
 	Color red   = new Color (209f/255f, 95f/255f, 93f/255f);
 
 	void Awake () {
-		pv = GetComponent<PhotonView> ();
 		nv = GetComponent<NetworkView> ();
 	}
 	
@@ -85,7 +83,6 @@ public class ProgramController : MonoBehaviour {
 	public void JoystickMove (Vector2 joystick) {
 		Debug.Log ("[ProgramController:JoystickMove] " + joystick.ToString ());
 //		nv.RPC ("Move", RPCMode.Others, joystick.y, joystick.x);
-		pv.RPC ("Move", PhotonTargets.Others, joystick.y, joystick.x);
 	}
 
 	public void JoystickPanTilt (Vector2 joystick) {
