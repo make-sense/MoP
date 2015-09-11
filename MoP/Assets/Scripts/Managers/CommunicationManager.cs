@@ -55,7 +55,9 @@ public class CommunicationManager : MonoBehaviour {
 
 	public bool IsConnected ()
 	{
-		return _comm.IsConnected ();
+		if (_comm != null)
+			return _comm.IsConnected ();
+		return false;
 	}
 
 	public string[] GetDeviceList () {

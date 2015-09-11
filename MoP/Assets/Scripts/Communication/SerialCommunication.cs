@@ -18,12 +18,10 @@ public class SerialCommunication : CommunicationBase {
 			serialPort.Open ();
 			if (serialPort.IsOpen)
 				return true;
-			else
-				return false;
 		} catch (Exception e) {
 			Debug.Log (e.ToString ());
-			return false;
 		}
+		return false;
 		#else
 		throw new System.NotImplementedException("Not implemented except android and windows");
 		#endif

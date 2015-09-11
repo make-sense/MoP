@@ -44,8 +44,39 @@ public class Program : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.Escape)) {
-			Application.Quit(); 
+		try {
+	//		Debug.Log ("Horizontal: " + Input.GetAxis ("Horizontal") + ", Vertical: " + Input.GetAxis("Vertical") + ", JoyRX: " + Input.GetAxis("JoyRX") + ", JoyRY: " + Input.GetAxis("JoyRY"));
+//			Debug.Log (  ", 5: " + Input.GetKeyDown(KeyCode.JoystickButton5)
+//			           + ", 6: " + Input.GetKeyDown(KeyCode.JoystickButton6)
+//			           + ", 8: " + Input.GetKeyDown(KeyCode.JoystickButton8)
+//			           + ", 9: " + Input.GetKeyDown(KeyCode.JoystickButton9)
+//			           + ",11: " + Input.GetKeyDown(KeyCode.JoystickButton11)
+//			           + ",12: " + Input.GetKeyDown(KeyCode.JoystickButton12)
+//			           + ",13: " + Input.GetKeyDown(KeyCode.JoystickButton13)
+//			           + ",14: " + Input.GetKeyDown(KeyCode.JoystickButton14));
+
+			if (Input.GetKeyDown(KeyCode.JoystickButton5))
+				Debug.Log ("Joystick A");
+			else if (Input.GetKeyDown (KeyCode.JoystickButton6))
+		         Debug.Log ("Joystick B");
+	         else if (Input.GetKeyDown (KeyCode.JoystickButton8))
+		         Debug.Log ("Joystick X");
+	         else if (Input.GetKeyDown (KeyCode.JoystickButton9))
+		         Debug.Log ("Joystick Y");
+	         else if (Input.GetKeyDown (KeyCode.JoystickButton11))
+		         Debug.Log ("Joystick L");
+	         else if (Input.GetKeyDown (KeyCode.JoystickButton12))
+		         Debug.Log ("Joystick R");
+	         else if (Input.GetKeyDown (KeyCode.JoystickButton13))
+		         Debug.Log ("Joystick LL");
+	         else if (Input.GetKeyDown (KeyCode.JoystickButton14))
+		         Debug.Log ("Joystick RR");
+
+			if (Input.GetKeyDown(KeyCode.Escape)) {
+//				Application.Quit(); 
+			}
+		}
+		catch (Exception e) {
 		}
 	}
 
