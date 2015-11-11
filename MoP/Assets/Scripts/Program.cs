@@ -15,6 +15,7 @@ public class Program : MonoBehaviour {
 		Debug.Log ("[Program:Start]");
 		nv = GetComponentInChildren<NetworkView> ();
 		StartCoroutine ("SyncMotion");
+//		StartCoroutine ("JoystickProcess");
 	}
 
 	bool enableSync;
@@ -31,7 +32,45 @@ public class Program : MonoBehaviour {
 		}
 		yield return null;
 	}
-	
+
+	bool joystick_process = true;
+	int xy_mode = 0;	// 0: mobile, 1:neck
+	void JoystickProcess () {
+		bool mobile_moving = false;
+//		while (joystick_process) 
+		{
+			float joyX = Input.GetAxis ("Horizontal");
+			float joyY = Input.GetAxis("Vertical");
+
+//			Debug.Log (string.Format ("JoystickProcess: {0}, {1}", joyX, joyY));
+
+			switch (xy_mode) {
+			case 0:
+				JoystickMovility (new Vector2 (joyX, joyY));
+				Debug.Log (string.Format ("JoystickProcess: {0}, {1}", joyX, joyY));
+				break;
+			case 1:
+				JoystickPanTilt (new Vector2 (joyX, joyY));
+				Debug.Log (string.Format ("Joystick PanTilt: {0}, {1}", joyX, joyY));
+				break;
+			default:
+				break;
+			}
+
+			if (Input.GetKeyDown (KeyCode.JoystickButton7)) {
+				Debug.Log ("Joystick Mode: PanTilt");
+				xy_mode = 1;
+			}
+			if (Input.GetKeyUp (KeyCode.JoystickButton7)) {
+				Debug.Log ("Joystick Mode: Mobility");
+				xy_mode = 0;
+			}
+
+//			yield return new WaitForSeconds (0.1f);
+		}
+//		yield return null;
+	}
+
 	void SyncArmMotor () {
 		nv.RPC ("PostureArm", RPCMode.Others, 
 		        RobotManager.Instance.Angle[2],
@@ -45,7 +84,9 @@ public class Program : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		try {
-	//		Debug.Log ("Horizontal: " + Input.GetAxis ("Horizontal") + ", Vertical: " + Input.GetAxis("Vertical") + ", JoyRX: " + Input.GetAxis("JoyRX") + ", JoyRY: " + Input.GetAxis("JoyRY"));
+			JoystickProcess ();
+
+//			Debug.Log ("Horizontal: " + Input.GetAxis ("Horizontal") + ", Vertical: " + Input.GetAxis("Vertical") + ", JoyRX: " + Input.GetAxis("JoyRX") + ", JoyRY: " + Input.GetAxis("JoyRY"));
 //			Debug.Log (  ", 5: " + Input.GetKeyDown(KeyCode.JoystickButton5)
 //			           + ", 6: " + Input.GetKeyDown(KeyCode.JoystickButton6)
 //			           + ", 8: " + Input.GetKeyDown(KeyCode.JoystickButton8)
@@ -55,23 +96,88 @@ public class Program : MonoBehaviour {
 //			           + ",13: " + Input.GetKeyDown(KeyCode.JoystickButton13)
 //			           + ",14: " + Input.GetKeyDown(KeyCode.JoystickButton14));
 
-			if (Input.GetKeyDown(KeyCode.JoystickButton5))
-				Debug.Log ("Joystick A");
-			else if (Input.GetKeyDown (KeyCode.JoystickButton6))
-		         Debug.Log ("Joystick B");
-	         else if (Input.GetKeyDown (KeyCode.JoystickButton8))
-		         Debug.Log ("Joystick X");
-	         else if (Input.GetKeyDown (KeyCode.JoystickButton9))
-		         Debug.Log ("Joystick Y");
-	         else if (Input.GetKeyDown (KeyCode.JoystickButton11))
-		         Debug.Log ("Joystick L");
-	         else if (Input.GetKeyDown (KeyCode.JoystickButton12))
-		         Debug.Log ("Joystick R");
-	         else if (Input.GetKeyDown (KeyCode.JoystickButton13))
-		         Debug.Log ("Joystick LL");
-	         else if (Input.GetKeyDown (KeyCode.JoystickButton14))
-		         Debug.Log ("Joystick RR");
-
+//			if (Input.GetKeyDown(KeyCode.JoystickButton0))
+//				Debug.Log ("Joystick 0 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton1))
+//				Debug.Log ("Joystick 1 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton2))
+//				Debug.Log ("Joystick 2 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton3))
+//				Debug.Log ("Joystick 3 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton4))
+//				Debug.Log ("Joystick 4 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton5))
+//				Debug.Log ("Joystick 5 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton6))
+//				Debug.Log ("Joystick 6 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton7))
+//				Debug.Log ("Joystick 7 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton8))
+//				Debug.Log ("Joystick 8 DN");
+//	        else if (Input.GetKeyDown (KeyCode.JoystickButton9))
+//				Debug.Log ("Joystick 9 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton10))
+//				Debug.Log ("Joystick 10 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton11))
+//				Debug.Log ("Joystick 11 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton12))
+//				Debug.Log ("Joystick 12 DN");
+//	        else if (Input.GetKeyDown (KeyCode.JoystickButton13))
+//				Debug.Log ("Joystick 13 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton14))
+//				Debug.Log ("Joystick 14 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton15))
+//				Debug.Log ("Joystick 15 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton16))
+//				Debug.Log ("Joystick 16 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton17))
+//				Debug.Log ("Joystick 17 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton18))
+//				Debug.Log ("Joystick 18 DN");
+//			else if (Input.GetKeyDown (KeyCode.JoystickButton19))
+//				Debug.Log ("Joystick 19 DN");
+//
+//			if (Input.GetKeyUp(KeyCode.JoystickButton0))
+//				Debug.Log ("Joystick 0 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton1))
+//				Debug.Log ("Joystick 1 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton2))
+//				Debug.Log ("Joystick 2 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton3))
+//				Debug.Log ("Joystick 3 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton4))
+//				Debug.Log ("Joystick 4 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton5))
+//				Debug.Log ("Joystick 5 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton6))
+//				Debug.Log ("Joystick 6 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton7))
+//				Debug.Log ("Joystick 7 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton8))
+//				Debug.Log ("Joystick 8 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton9))
+//				Debug.Log ("Joystick 9 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton10))
+//				Debug.Log ("Joystick 10 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton11))
+//				Debug.Log ("Joystick 11 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton12))
+//				Debug.Log ("Joystick 12 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton13))
+//				Debug.Log ("Joystick 13 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton14))
+//				Debug.Log ("Joystick 14 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton15))
+//				Debug.Log ("Joystick 15 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton16))
+//				Debug.Log ("Joystick 16 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton17))
+//				Debug.Log ("Joystick 17 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton18))
+//				Debug.Log ("Joystick 18 UP");
+//			else if (Input.GetKeyUp (KeyCode.JoystickButton19))
+//				Debug.Log ("Joystick 19 UP");
+//
 			if (Input.GetKeyDown(KeyCode.Escape)) {
 //				Application.Quit(); 
 			}
@@ -106,9 +212,9 @@ public class Program : MonoBehaviour {
 
 	public void JoystickMovility (Vector2 joystick) {
 		if (ConfigManager.NetworkMode == 0)
-			RobotManager.Instance.Mobility (joystick.y*0.7f, joystick.x*0.5f);
+			RobotManager.Instance.Mobility (joystick.y, joystick.x);
 		else
-			nv.RPC ("Mobility", RPCMode.Others, joystick.y*0.7f, joystick.x*0f);
+			nv.RPC ("Mobility", RPCMode.Others, joystick.y, joystick.x);
 	}
 
 	public void JoystickPanTilt (Vector2 pantilt) {
