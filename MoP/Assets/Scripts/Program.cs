@@ -84,7 +84,7 @@ public class Program : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		try {
-			JoystickProcess ();
+//			JoystickProcess ();
 
 //			Debug.Log ("Horizontal: " + Input.GetAxis ("Horizontal") + ", Vertical: " + Input.GetAxis("Vertical") + ", JoyRX: " + Input.GetAxis("JoyRX") + ", JoyRY: " + Input.GetAxis("JoyRY"));
 //			Debug.Log (  ", 5: " + Input.GetKeyDown(KeyCode.JoystickButton5)
