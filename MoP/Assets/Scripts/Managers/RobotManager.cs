@@ -106,10 +106,10 @@ public class RobotManager : MonoBehaviour {
 		Mobility (0, 0);
 	}
 	
-	public void PanTilt (float pan, float tilt) {
-		Debug.Log ("[RobotManager:PanTilt] : (" + pan.ToString () + ", " + tilt.ToString () + ")"); 
+	public void PanTilt (float pan, float tlt) {
+		Debug.Log ("[RobotManager:PanTilt] : (" + pan.ToString () + ", " + tlt.ToString () + ")"); 
 		CommunicationManager.Instance.Write (UcrParser.GetBuffMotorAngle (1, (int)(pan*90)+150));
-		CommunicationManager.Instance.Write (UcrParser.GetBuffMotorAngle (2, (int)(tilt*40)+150));
+		CommunicationManager.Instance.Write (UcrParser.GetBuffMotorAngle (2, (int)(tlt*40)+130));
 	}
 
 	public void JoystickPanTilt (Vector2 pantilt) {

@@ -8,6 +8,8 @@ public class AndroidManager : MonoBehaviour {
 	AndroidJavaObject _activity;
 	AndroidJavaClass _class;
 
+	DateTime lastPtCmd;
+
 	const bool DEBUG = false;
 
 	void Awake () {
@@ -17,6 +19,7 @@ public class AndroidManager : MonoBehaviour {
 		if (_activity == null)
 			Debug.Log ("AndroidActivity is null");
 		_activity.Call ("Echo", "Hello");
+		lastPtCmd = DateTime.Now;
 	}
 
 	// Use this for initialization
@@ -115,7 +118,7 @@ public class AndroidManager : MonoBehaviour {
 	
 	public void Send(byte[] buff)
 	{
-		Debug.Log ("[AndroidManager::Send] " + ByteArrayToHexString(buff));
+//		Debug.Log ("[AndroidManager::Send] " + ByteArrayToHexString(buff));
 		try {
 			_SendBTMessage(ByteArrayToHexString(buff));
 		}catch (Exception e) {
@@ -178,8 +181,66 @@ public class AndroidManager : MonoBehaviour {
 		if (DEBUG)
 			Debug.Log("[AndroidManager::BluetoothData] " + readData);
 	}
+
+	float pan = 0f;
+	float tilt = 0f;
+	float PAN_STEP = 0.01f;
+	float PAN_MIN = -1f;
+	float PAN_MAX = 1f;
+	float TLT_STEP = 0.02f;
+	float TLT_MIN = -1f;
+	float TLT_MAX = 1f;
+	void FacePos (string pos)
+	{
+		if (DateTime.Now.Subtract (lastPtCmd).TotalMilliseconds < 50)
+			return;
+		lastPtCmd = DateTime.Now;
+
+		string[] pt = pos.Split (',');
+		int posX = int.Parse (pt [0]);
+		int posY = int.Parse (pt [1]);
+
+		if (Math.Abs (posX) > 100) {
+			if (posX < -100)
+				pan -= PAN_STEP;
+			else if (posX > 100)
+				pan += PAN_STEP;
+			if (pan < PAN_MIN)
+				pan = PAN_MIN;
+			if (pan > PAN_MAX)
+				pan = PAN_MAX;
+		}
+
+		if (Math.Abs (posY) > 100) {
+			if (posY < -100)
+				tilt -= TLT_STEP;
+			else if (posY > 100)
+				tilt += TLT_STEP;
+			if (tilt < TLT_MIN)
+				tilt = TLT_MIN;
+			if (tilt > TLT_MAX)
+				tilt = TLT_MAX;
+		}
+
+		StopCoroutine ("PanTiltCenter");
+		RobotManager.Instance.PanTilt(-pan, tilt);
+//		Debug.Log ("[AndroidManager::FacePos] x: " + pt [0] + ", y: " + pt [1]);
+		StartCoroutine ("PanTiltCenter");
+	}
 	#endregion
 
+	float RTN_STEP = 0.05f;
+	IEnumerator PanTiltCenter() 
+	{
+		yield return new WaitForSeconds(3f);
+		while (Math.Abs (pan) + Math.Abs (tilt) > 0.11f) {
+			pan = (pan > 0) ? pan-RTN_STEP : pan+RTN_STEP;
+			tilt = (tilt > 0) ? tilt-RTN_STEP : tilt+RTN_STEP;
+			RobotManager.Instance.PanTilt(-pan, tilt);
+			yield return new WaitForSeconds (0.1f);
+		}
+		RobotManager.Instance.PanTilt (0f, 0f);
+	}
 
 	#region Bluetooth private Methods
 	private void _SendBTMessage(String message)

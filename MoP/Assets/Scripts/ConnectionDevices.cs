@@ -19,17 +19,24 @@ public class ConnectionDevices : MonoBehaviour {
 		StartCoroutine ("CheckConnection");
 		connectButtonText.text = ConfigManager.SelectedDevice;
 	}
-	
+
+	bool isConnectedPrev = false;
 	IEnumerator CheckConnection () {
 		while (true) {
-			if (CommunicationManager.Instance.IsConnected ())
+			if (CommunicationManager.Instance.IsConnected ()) {
 				state.color = MS_Color.blue;
-			else {
-				//				if (AndroidManager.Instance.BluetoothConnectingState == 2)
-				//					btImage.sprite = BTConnecting;
-				//				else if (AndroidManager.Instance.BluetoothConnectingState == 1)
+				if (!isConnectedPrev) {
+					RobotManager.Instance.PanTilt (0f, 0f);
+				}
+			}
+			else
+			{
+//				if (AndroidManager.Instance.BluetoothConnectingState == 2)
+//					btImage.sprite = BTConnecting;
+//				else if (AndroidManager.Instance.BluetoothConnectingState == 1)
 				state.color = MS_Color.white;
 			}
+			isConnectedPrev = CommunicationManager.Instance.IsConnected ();
 			yield return new WaitForSeconds(1f);
 		}
 		yield return null;
