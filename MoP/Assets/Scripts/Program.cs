@@ -211,17 +211,17 @@ public class Program : MonoBehaviour {
 	}
 
 	public void JoystickMovility (Vector2 joystick) {
-//		if (ConfigManager.NetworkMode == 0)
-//			RobotManager.Instance.Mobility (joystick.y, joystick.x);
-//		else
-//			nv.RPC ("Mobility", RPCMode.Others, joystick.y, joystick.x);
+		if (ConfigManager.NetworkMode == 0)
+			RobotManager.Instance.Mobility (joystick.y, joystick.x);
+		else
+			nv.RPC ("Mobility", RPCMode.Others, joystick.y, joystick.x);
 	}
 
 	public void JoystickPanTilt (Vector2 pantilt) {
-//		if (ConfigManager.NetworkMode == 0)
-//			RobotManager.Instance.PanTilt (-pantilt.x, -pantilt.y);
-//		else
-//			nv.RPC ("PanTilt", RPCMode.Others, -pantilt.x, -pantilt.y);
+		if (ConfigManager.NetworkMode == 0)
+			RobotManager.Instance.PanTilt (-pantilt.x, -pantilt.y);
+		else
+			nv.RPC ("PanTilt", RPCMode.Others, -pantilt.x, -pantilt.y);
 	}
 	
 	public void LeftArm (int degree) {
